@@ -113,9 +113,7 @@ End If
 
 <section id="fh5co-product-section" class="section">
 
-
-
-    <div class="container">
+<!--     <div class="container">
         <div class="row">
             <div class="col-md-6">
                 <h6>MEN /</h6>
@@ -127,7 +125,8 @@ End If
     </div>
     <div class="container" style="padding: 0">
         <div class="divider" style="margin: 0 0 5rem 0"></div>
-    </div>
+    </div> -->
+    
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -300,10 +299,10 @@ End If
 
         toastr.options = {
                 "closeButton": true,
-                "debug": false,
+                "debug": true,
                 "newestOnTop": false,
                 "progressBar": false,
-                "positionClass": "toast-top-full-width",
+                "positionClass": "toast-center",
                 "preventDuplicates": false,
                 "onclick": null,
                 "showDuration": "300",
@@ -316,7 +315,7 @@ End If
                 "hideMethod": "fadeOut"
         }
 
-        toastr.success("<%=Message %><br>Order added to Cart", "Process Order <%=Qty %>")
+        toastr.success("<%=Message %><br>Order added to Cart", "Process Order <%=Qty %>");
         //toastr.success('Have fun storming the castle!', 'Miracle Max Says');
 
     });

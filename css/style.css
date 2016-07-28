@@ -1548,3 +1548,15 @@ nav .pagination {
 
 }
 
+#toast-container {
+  position: absolute !important;
+}
+
+.toast-center {
+  width: 350px;
+  top: 50%;
+  right: 50%;
+  margin-right: -175px;
+  margin-top: -50px;
+}
+

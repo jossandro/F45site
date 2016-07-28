@@ -6,6 +6,42 @@
 <!--#include file="menu_top_db.asp" -->
 <!--#include file="search_functions.asp" -->
 
+<%
+Dim RSProduct__MMColParam
+RSProduct__MMColParam = "1"
+If (Request.QueryString("Category") <> "") Then 
+  RSProduct__MMColParam = Request.QueryString("Category")
+End If
+%>
+<%
+Dim RSProduct
+Dim RSProduct_numRows
+Dim qtdResults
+
+Set RSProduct = Server.CreateObject("ADODB.Recordset")
+RSProduct.ActiveConnection = MM_dbConnect_STRING
+
+Dim query
+Dim sqlCode
+query = ""
+sqlCode = "SELECT TOP 12 ep.*, p.lgimage FROM extend_products ep INNER JOIN products p ON p.ID = ep.ID INNER JOIN category c ON ep.Cat_ID = c.Cat_ID WHERE c.client_ID = 99 ORDER BY NEWID() "
+'and CheckStringForSQL(Request.Form("q"))
+If (len(Request.Form("q")) > 2 ) Then 
+  query = Replace(Request.Form("q"),"'"," ")
+  sqlCode = "SELECT ep.*, p.lgimage FROM extend_products ep INNER JOIN products p ON p.ID = ep.ID INNER JOIN category c ON ep.Cat_ID = c.Cat_ID WHERE c.client_ID = 99 AND (ep.expr1 like '%"+query+"%' OR ep.Description like '%"+query+"%' OR ep.custom like '%"+query+"%' OR ep.custom_desc like '%"+query+"%' ) ORDER BY listp, Custom ASC"
+End If
+
+RSProduct.Source = sqlCode
+
+RSProduct.CursorType = 0
+RSProduct.CursorLocation = 3
+RSProduct.LockType = 1
+RSProduct.Open()
+
+RSProduct_numRows = 0
+qtdResults = RSProduct.RecordCount
+%>
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -16,6 +52,22 @@
 
 
 <section id="fh5co-products-section" class="section">
+    <%
+    if qtdResults > 0 and len(query) > 2 then          %>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 ">
+                    <h6 class="text-center">Your search for "<%=query%>" found <%=qtdResults  %> itens</h6>
+                </div>
+            </div>
+        </div>
+        <div class="container" style="padding: 0">
+            <div class="divider" style="margin: 0 0 5rem 0"></div>
+        </div>
+    <%
+    end if
+    %>
+    
 
     <div class="container">
         <div class="row">
@@ -32,44 +84,11 @@
         <div class="divider" style="margin: 45px 0 5rem 0"></div>
     </div>
 
-    <%
-    Dim RSProduct__MMColParam
-    RSProduct__MMColParam = "1"
-    If (Request.QueryString("Category") <> "") Then 
-      RSProduct__MMColParam = Request.QueryString("Category")
-    End If
-    %>
-    <%
-    Dim RSProduct
-    Dim RSProduct_numRows
-
-    Set RSProduct = Server.CreateObject("ADODB.Recordset")
-    RSProduct.ActiveConnection = MM_dbConnect_STRING
-
-    Dim query
-    Dim sqlCode
-    query = ""
-    sqlCode = "SELECT TOP 12 ep.*, p.lgimage FROM extend_products ep INNER JOIN products p ON p.ID = ep.ID INNER JOIN category c ON ep.Cat_ID = c.Cat_ID WHERE c.client_ID = 99 ORDER BY NEWID() "
-    'and CheckStringForSQL(Request.Form("q"))
-    If (len(Request.Form("q")) > 2 ) Then 
-      query = 
-      query = Replace(Request.Form("q"),"'"," ")
-      sqlCode = "SELECT ep.*, p.lgimage FROM extend_products ep INNER JOIN products p ON p.ID = ep.ID INNER JOIN category c ON ep.Cat_ID = c.Cat_ID WHERE c.client_ID = 99 AND (ep.expr1 like '%"+query+"%' OR ep.Description like '%"+query+"%' OR ep.custom like '%"+query+"%' OR ep.custom_desc like '%"+query+"%' ) ORDER BY listp, Custom ASC"
-    End If
-
-    RSProduct.Source = sqlCode
-
-    RSProduct.CursorType = 0
-    RSProduct.CursorLocation = 3
-    RSProduct.LockType = 1
-    RSProduct.Open()
-
-    RSProduct_numRows = 0
-    %>
+    
 
     <div class="container padding-top-60">
         <div class="row">   <% 
-        if RSProduct.RecordCount > 0 then
+        if qtdResults > 0 then
             While (NOT RSProduct.EOF)
                 Cat_title = RSProduct.Fields.Item("Description").value       
                 dim prodName
