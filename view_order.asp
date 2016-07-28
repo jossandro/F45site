@@ -131,19 +131,19 @@ str_Promo_Disc = RSClient1.Fields.Item("Promo_Disc").Value
             If (validate)  Then %> 
             onSubmit="MM_validateForm(<%= validate_string %>);return document.MM_returnValue" 
             <% End If %> >
-        <div class="panel panel-default">
+        <div class="panel panel-default panel-order">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-md-1 col-sm-2 col-xs-12 order-img">  </div>
-                    <div class="col-md-3 col-sm-2 col-xs-12 order-prod-name">Product</div>
-                    <div class="col-md-1 col-sm-2 col-xs-12 order-prod-code">Code </div>
-                    <div class="col-md-1 col-sm-2 col-xs-12 order-prod-custom">Custom</div>
-                    <div class="col-md-1 col-sm-2 col-xs-12 order-prod-color">Colour</div>
-                    <div class="col-md-1 col-sm-2 col-xs-12 order-prod-size">Size</div>
-                    <div class="col-md-1 col-sm-2 col-xs-12 order-prod-qty">Qty  </div>
-                    <div class="col-md-1 col-sm-2 col-xs-12 order-prod-price">Price</div>
-                    <div class="col-md-1 col-sm-2 col-xs-12 order-prod-total">Total </div>
-                    <div class="col-md-1 col-sm-2 col-xs-12 order-prod-actions">    </div>
+                    <div class="col-md-3 col-sm-2 col-xs-12 order-item">Product</div>
+                    <div class="col-md-1 col-sm-2 col-xs-12 order-item">Code </div>
+                    <div class="col-md-1 col-sm-2 col-xs-12 order-item">Custom</div>
+                    <div class="col-md-1 col-sm-2 col-xs-12 order-item">Colour</div>
+                    <div class="col-md-1 col-sm-2 col-xs-12 order-item">Size</div>
+                    <div class="col-md-1 col-sm-2 col-xs-12 order-item">Qty  </div>
+                    <div class="col-md-1 col-sm-2 col-xs-12 order-item">Price</div>
+                    <div class="col-md-1 col-sm-2 col-xs-12 order-item">Total </div>
+                    <div class="col-md-1 col-sm-2 col-xs-12 order-item">    </div>
                 </div> 
             </div>
             <div class="panel-body" >   <% 
@@ -166,7 +166,7 @@ str_Promo_Disc = RSClient1.Fields.Item("Promo_Disc").Value
                           End If  %>
                             
                         </div>
-                        <div class="col-md-3 col-sm-2 col-xs-12 order-prod-name">
+                        <div class="col-md-3 col-sm-2 col-xs-12 order-item">
                             <p>
                                 <b><%= newarray(4,j)  %>&nbsp;</b>
                                 <% 'NamePrinted 
@@ -175,32 +175,34 @@ str_Promo_Disc = RSClient1.Fields.Item("Promo_Disc").Value
                                 <% End If %>
                             </p>
                         </div>
-                        <div class="col-md-1 col-sm-2 col-xs-12 order-prod-code">
+                        <div class="col-md-1 col-sm-2 col-xs-12 order-item">
                             <p><%=newarray(2,j) %></p> 
                         </div>
-                        <div class="col-md-1 col-sm-2 col-xs-12 order-prod-custom">
+                        <div class="col-md-1 col-sm-2 col-xs-12 order-item">
                             <p><%=newarray(5,j)%></p>
                         </div>
-                        <div class="col-md-1 col-sm-2 col-xs-12 order-prod-color">
+                        <div class="col-md-1 col-sm-2 col-xs-12 order-item">
                             <p><%=newarray(6,j) %></p>
                         </div>
-                        <div class="col-md-1 col-sm-2 col-xs-12 order-prod-size">
+                        <div class="col-md-1 col-sm-2 col-xs-12 order-item">
                             <p><%= newarray(3,j) %></p>
                         </div>  <%      
                         price = newarray(1,j)
                         qty = newarray(0,j)
                         total_items = total_items + (price*qty)   %> 
-                        <div class="col-md-1 col-sm-2 col-xs-12 order-prod-qty">
+                        <div class="col-md-1 col-sm-2 col-xs-12 order-item">
                             <p><%=qty %></p>
                         </div>
-                        <div class="col-md-1 col-sm-2 col-xs-12 order-prod-price">
+                        <div class="col-md-1 col-sm-2 col-xs-12 order-item">
                             <p><%= FormatCurrency(price, 2, -2, -2, -2)  %></p>
                         </div>
-                        <div class="col-md-1 col-sm-2 col-xs-12 order-prod-total">
+                        <div class="col-md-1 col-sm-2 col-xs-12 order-item">
                             <p><%= FormatCurrency(price*qty, 2, -2, -2, -2) %></p>
                         </div>
-                        <div class="col-md-1 col-sm-2 col-xs-12 order-prod-actions">
-                            <a href="view_order.asp?code=<%= newarray(10,j) %><%= newarray(3,j) %><%= newarray(6,j) %><%= newarray(8,j) %>">Delete Item</a>
+                        <div class="col-md-1 col-sm-2 col-xs-12 order-item">
+                            <a href="view_order.asp?code=<%= newarray(10,j) %><%= newarray(3,j) %><%= newarray(6,j) %><%= newarray(8,j) %>">
+                                <img src="images/delete.svg" class="img-item-icon" alt="Delete Item" />
+                            </a>
                         </div>
                     </div>        
                 <% Next  %>

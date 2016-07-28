@@ -210,9 +210,7 @@ end function
 
 <section id="fh5co-product-section" class="section">
 
-
-
-    <div class="container">
+   <!--  <div class="container">
         <div class="row">
             <div class="col-md-6">
                 <h6>MEN /</h6>
@@ -224,7 +222,7 @@ end function
     </div>
     <div class="container" style="padding: 0">
         <div class="divider" style="margin: 0 0 5rem 0"></div>
-    </div>
+    </div> -->
     <div class="container">
 
         <h3>Update Your Profile</h3>

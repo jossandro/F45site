@@ -26,7 +26,7 @@ RSClient1_numRows = 0
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>F45</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="F45" />
+    <meta name="description" content="F45 website" />
     <meta name="keywords" content="F45" />
     <meta name="author" content="ReturnOnClick" />
 
@@ -80,22 +80,22 @@ RSClient1_numRows = 0
 <header id="fh5co-header-section" role="header">
     <div class="fluid-container text-center">
         <div class="fh5co-navbar-brand">
-            <div class="col-md-4 pull-left">
+            <div class="col-md-5 pull-left">
                 <nav id="fh5co-sliding-nav-left" role="navigation">
                     <ul>
                         <li><a href="#">F45 Training</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="contactus.asp">Contact Us</a></li>
                         <li><a href="#">Support</a></li>
                     </ul>
                 </nav>
             </div>
-            <div class="col-md-4 text-center">
+            <div class="col-md-2 text-center">
                 <a class="fh5co-logo" href="default.asp">F45</a>
             </div>
-            <div class="col-md-4 pull-right">
+            <div class="col-md-5 pull-right">
                 <nav id="fh5co-sliding-nav-right" role="navigation">
                     <ul>
-                        <li><a href="#">
+                        <li><a href="search.asp">
                             <span class="icon-search"></span>
                             <span class="visuallyhidden">Search</span>
                         </a></li>

@@ -1199,6 +1199,12 @@ span.icon-plus:before {
   }
 }
 
+@media screen and (max-width: 1280px) {
+  header .fh5co-navbar-brand #fh5co-sliding-nav-left > ul {
+    padding: 0;
+    -webkit-padding-end: 20px !important;
+  }
+}
 
 /* base styles */
 
@@ -1505,3 +1511,40 @@ nav .pagination {
 .borderless th {
     border: none;
 }
+
+.order-prod-total , 
+.order-prod-price , 
+.order-prod-qty , 
+.order-prod-size , 
+.order-prod-color , 
+.order-prod-custom , 
+.order-prod-code , 
+.order-prod-name , 
+#fh5co-product-section p , b {
+  font-size: 16px !important;
+}
+
+.img-item-icon {
+  height: 30px;
+  width: auto;
+}
+
+.order-item {
+  padding-top: 15px;
+}
+
+#fh5co-products-section .icon-search{
+  font-size: 24px;
+  position: absolute;
+  padding: .8rem;
+}
+.search-input {
+  padding: 1px 0 3px 35px;
+  line-height: 32px;
+}
+.btn-search {
+  border: none;
+  border-radius: 0;
+
+}
+

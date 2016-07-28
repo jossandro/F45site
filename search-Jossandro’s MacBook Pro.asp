@@ -4,6 +4,7 @@
 <!--#include file="../Connections/dbConnect.asp" -->
 
 <!--#include file="menu_top_db.asp" -->
+<!--#include file="search_functions.asp" -->
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -13,24 +14,22 @@
 
 <!--#include file="header_menu.asp" -->
 
-<section class="owl-carousel owl-carousel1 owl-carousel-fullwidth fh5co-light-arrow animate-box" data-animate-effect="fadeIn">
-    <div class="item"><a href="images/under-armour.jpg" class="image-popup"><img src="images/under-armour.jpg" alt="image"></a></div>
-    <div class="item"><a href="images/nike-just-do-it.jpg" class="image-popup"><img src="images/nike-just-do-it.jpg" alt="image"></a></div>
-</section>
-
 
 <section id="fh5co-products-section" class="section">
+
     <div class="container">
         <div class="row">
+            <form method="post" >
             <div class="col-md-12 text-center">
-                <h2>Top Products</h2>
+                <span class="icon-search"></span>
+                <input type="text" name="q" class="search-input" placeholder="Search">
+                <input type="submit" class="btn btn-filters" value="Ok">
             </div>
-            <!-- <div class="col-md-6 col-md-offset-3 text-center">
-                <a class="btn btn-filters" href="#">Best Sellers</a>
-                <a class="btn btn-filters" href="#">New Arrivals</a>
-                <a class="btn btn-filters" href="#">Featured</a>
-            </div> -->
+            </form>
         </div>
+    </div>
+    <div class="container" style="padding: 0">
+        <div class="divider" style="margin: 45px 0 5rem 0"></div>
     </div>
 
     <%
@@ -46,9 +45,18 @@
 
     Set RSProduct = Server.CreateObject("ADODB.Recordset")
     RSProduct.ActiveConnection = MM_dbConnect_STRING
-    'RSProduct.Source = "SELECT * FROM extend_products WHERE Cat_ID = " + Replace(RSProduct__MMColParam, "'", "''") + " ORDER BY listp, Description ASC"
-    'RSProduct.Source = "SELECT top 12 * FROM products "
-    RSProduct.Source = "SELECT TOP 12 ep.*, p.lgimage FROM extend_products ep INNER JOIN products p ON p.ID = ep.ID INNER JOIN category c ON ep.Cat_ID = c.Cat_ID WHERE c.client_ID = 99 ORDER BY NEWID() "   ' WHERE ep.Cat_ID = 300"
+
+    Dim query
+    Dim sqlCode
+    query = ""
+    sqlCode = "SELECT TOP 12 ep.*, p.lgimage FROM extend_products ep INNER JOIN products p ON p.ID = ep.ID INNER JOIN category c ON ep.Cat_ID = c.Cat_ID WHERE c.client_ID = 99 ORDER BY NEWID() "
+    If (Request.Form("q") <> "" and CheckStringForSQL(Request.Form("q"))) Then 
+      query = Request.Form("q")
+      sqlCode = "SELECT ep.*, p.lgimage FROM extend_products ep INNER JOIN products p ON p.ID = ep.ID INNER JOIN category c ON ep.Cat_ID = c.Cat_ID WHERE c.client_ID = 99 AND (ep.expr1 like '%"+query+"%' OR ep.Description like '%"+query+"%' OR ep.custom like '%"+query+"%' OR ep.custom_desc like '%"+query+"%' ) ORDER BY listp, Custom ASC"
+    End If
+
+    RSProduct.Source = sqlCode
+
     RSProduct.CursorType = 0
     RSProduct.CursorLocation = 2
     RSProduct.LockType = 1

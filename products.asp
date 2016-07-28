@@ -246,7 +246,7 @@ End Function
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="row">
                     <div class="pull-left">
                        <h3><%=(RSCategory.Fields.Item("categorys").Value)%></h3>
@@ -318,15 +318,13 @@ End Function
                                 <div class="panel-body"> <%
                                 While (NOT RSColor.EOF)                                %>
                                     <div class="checkbox">
-                                        <label>
-                                            <%
+                                        <label>     <%
                                             dim ch
                                             if colorsObj.exists(RSColor.Fields.Item("Colour").Value) then
                                                 ch = " checked "
                                             Else
                                                 ch = " "
-                                            end if
-                                            %>
+                                            end if      %>
                                             <input type="checkbox" class="ckbcolor" value='<%=(RSColor.Fields.Item("Colour").Value)%>'   <%=ch%>  >
                                             <%=(RSColor.Fields.Item("Colour").Value)%>
                                         </label>
@@ -378,7 +376,7 @@ End Function
                     </div>
                 </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-10">
                 <!-- <div class="row">
                     <div class="pull-right">
                         <nav>
@@ -408,23 +406,40 @@ End Function
                     
                     RSProduct.AbsolutePage = nPage
                     Do While Not ( RSProduct.Eof Or RSProduct.AbsolutePage <> nPage )
-                        Cat_title = RSProduct.Fields.Item("Description").value       
+                        Cat_title = RSProduct.Fields.Item("Description").value   
+                        dim prodName
+                        If RSProduct.Fields.Item("Custom").Value <> "" Then 
+                            prodName = trim(RSProduct.Fields.Item("Custom").Value)
+                        End If
+                        If RSProduct.Fields.Item("Custom_desc").Value <> "" Then 
+                            prodName = prodName & trim(RSProduct.Fields.Item("Custom_desc").Value)
+                        End If
+                        if len(prodName) > 16 Then
+                            prodName = left(prodName, 14) & "..."
+                        end if
+
+                        str = prodName
+                        str1 = ""
+                        arrStr = split(str," ")
+
+                        For i=0 to ubound(arrStr)
+                            word = lcase(trim(arrStr(i)))
+                            word = UCase(Left(word, 1)) &  Mid(word, 2)
+                            str1 = str1 & word & " "
+                        next
+
+                        prodName = trim(str1)    
                         %>
                         <div class="products col-md-3 animate-box">
                             <!-- <span class="featured sale"><small>Sale</small></span> -->
+                            <a href="order.asp?ID=<%= RSProduct.Fields.Item("ID").Value %>&dept=<%= dept %>">
                             <figure >
                                 <img class="img-responsive" style="max-width:100%;" src="../databases/images/<%=(RSProduct.Fields.Item("lgimage").Value)%>" alt="">
                             </figure>
-                            <p class="item-name"><a href="order.asp?ID=<%= RSProduct.Fields.Item("ID").Value %>&dept=<%= dept %>">
-                                <% If RSProduct.Fields.Item("Custom").Value <> "" Then %>
-                                    <%=(RSProduct.Fields.Item("Custom").Value)%> 
-                                <% End If %>
-                                <% If RSProduct.Fields.Item("Custom_desc").Value <> "" Then %>
-                                    <%=(RSProduct.Fields.Item("Custom_desc").Value)%>
-                                <% End If %>
-                            </a></p>
+                            <p class="item-name"><%=prodName%></p>
                             <p class="item-category"><small><%=(ucase(left(Cat_title,1)) & lcase(mid(Cat_title,2)))%></small></p>
                             <p class="item-price">$<%=(RSProduct.Fields.Item("PriceInc").Value)%> <span class="icon-star-half-empty pull-right"></span></p>
+                            </a>
                         </div>      <%
 
                         RSProduct.MoveNext
