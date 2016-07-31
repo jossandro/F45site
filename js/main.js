@@ -36,13 +36,18 @@
 					id: 'fh5co-mobile-menu-ul',
 					class: ''
 				});
-				var cloneLogo = $('#fh5co-logo').clone().attr({
+				var cloneLogo = $('.fh5co-logo').clone().attr({
 					id : 'fh5co-logo-mobile',
 					class : ''
 				});
+				var cloneLogin = $('#fh5co-sliding-nav-right').clone().attr({
+					id : 'fh5co-login-mobile',
+					class : 'pull-right fh5co-login-mobile'
+				});
 
 				$('<div id="fh5co-logo-mobile-wrap">').append(cloneLogo).insertBefore('#fh5co-header-section');
-				$('#fh5co-logo-mobile-wrap').append('<a href="#" id="fh5co-mobile-menu-btn"><i class="ti-menu"></i></a>')
+				$('<div id="fh5co-login-mobile-wrap">').append(cloneLogin).insertBefore('#fh5co-header-section');
+				$('#fh5co-logo-mobile-wrap').append('<a href="#" id="fh5co-mobile-menu-btn"><span class="icon-align-justify"></span></a>')
 				$('<div id="fh5co-mobile-menu">').append(clone).insertBefore('#fh5co-header-section');
 
 				$('#fh5co-header-section').hide();
@@ -147,7 +152,7 @@
 			margin: 0,
 			responsiveClass: true,
 			nav: true,
-			dots: true,
+			dots: false,
 			smartSpeed: 500,
 			navText: [
 				"<i class='icon-chevron-left owl-direction'></i>",
@@ -156,11 +161,14 @@
 		});
 
 		$('.owl-carousel2').owlCarousel({
+			items: 1,
 			loop:true,
-			margin:10,
+			margin:0,
+			responsiveClass: true,
 			nav:true,
-			dots: true,
-			responsive:{
+			dots: false,
+			smartSpeed: 500,
+			/*responsive:{
 				0:{
 					items:1
 				},
@@ -170,7 +178,7 @@
 				1000:{
 					items:3
 				}
-			},
+			},*/
 			navText: [
 				"<i class='icon-chevron-left owl-direction'></i>",
 				"<i class='icon-chevron-right owl-direction'></i>"
@@ -230,12 +238,11 @@
 		});
 	};
 
-
 	var painelRefine = function () {
-        $('.panel-title a').on('click', function () {
-            $(this).children('span').toggleClass('icon-minus');
-        });
-    }
+		$('.panel-title a').on('click', function () {
+			$(this).children('span').toggleClass('icon-minus');
+		});
+	}
 
 	// Document on load.
 	$(function(){
@@ -251,7 +258,7 @@
 		painelRefine();
 	});
 
-
+	//==== Litle Joey's code
 	$('.ckbcolor').on('click',function(){
 		console.log(this.checked);
 		if(this.checked){

@@ -1560,3 +1560,22 @@ nav .pagination {
   margin-top: -50px;
 }
 
+.display-mobile{
+  display: none;
+}
+
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .col-xs-0 {
+      display: none;
+    }
+
+    .display-mobile{
+      display: block;
+    }
+}
+
+
+

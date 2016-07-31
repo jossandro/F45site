@@ -234,7 +234,7 @@ End Function
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h6>MEN /</h6>
+                <h6></h6>
             </div>
             <div class="col-md-6">
                 <h6><%=RSProduct_qtd  %> ITENS</h6>

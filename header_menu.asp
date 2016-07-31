@@ -18,6 +18,24 @@ RSClient1.LockType = 1
 RSClient1.Open()
 
 RSClient1_numRows = 0
+
+
+'====== RECURSIVE MENU =========
+
+' "WITH menus AS ( SELECT *, 1 as menu_level FROM aztectec_jddbo.Menu m WHERE m.menu_parent_id is null UNION ALL SELECT m2.*, mn.menu_level +1 AS menu_level FROM aztectec_jddbo.Menu m2 INNER JOIN menus AS mn ON m2.menu_parent_id = mn.menu_id WHERE m2.menu_parent_id is not null) SELECT * FROM menus "
+
+Dim sqlMneu
+sqlMenu = "SELECT * FROM Menu m WHERE m.menu_parent_id is null "
+
+Set RSMenu = Server.CreateObject("ADODB.Recordset")
+RSMenu.ActiveConnection = MM_dbConnect_STRING 
+RSMenu.Source = sqlMenu
+RSMenu.CursorType = 0
+RSMenu.CursorLocation = 2
+RSMenu.LockType = 1
+RSMenu.Open()
+
+
 %>
 
 
@@ -111,6 +129,8 @@ RSClient1_numRows = 0
                                     Check_cart = Check_cart + 1
                                 End If
                             Next
+                            
+
                             %>
                             
                             <a href="view_order.asp">
@@ -134,17 +154,42 @@ RSClient1_numRows = 0
         Cat_title = ""
         dept = 1
 
-         %>
+                %>
           
         <nav id="fh5co-menu-wrap" role="navigation" class="col-md-12 text-center">
-            <ul class="sf-menu" id="fh5co-primary-menu">
+            <ul class="sf-menu" id="fh5co-primary-menu">        <%
+                'While (NOT RSMenu.EOF)      %>
+                 <!--    <li class="active">
+                        <a href='<%=RSMenu.Fields.Item("menu_id").Value  %>' class="fh5co-sub-ddown">Mens</a>   -->      <%    
+
+'                        Set RSMenu2 = Server.CreateObject("ADODB.Recordset")
+'                        RSMenu2.ActiveConnection = MM_dbConnect_STRING
+'                        RSMenu2.Source = "SELECT * FROM Menu m WHERE m.menu_parent_id=" & RSMenu.Fields.Item("menu_id").Value
+'                        RSMenu2.CursorType = 0
+'                        RSMenu2.CursorLocation = 3
+'                        RSMenu2.LockType = 1
+'                        RSMenu2.Open()
+
+'                        if RSMenu2.RecordCount > 0 then         %>
+                            <!-- <ul class="fh5co-sub-menu">     -->     <%
+'                            While (NOT RSMenu2.EOF)             %>
+                               <!--  <li><a href="products.asp?category=298">Tees</a></li>  -->  <%
+'                            Wend        %>
+                         <!--    </ul> -->       <%
+ '                       end if          %>
+                    <!-- </li>         -->       <%
+'                    RSMenu.MoveNext()
+'                Wend
+                %>
+                
                 <li class="active">
                     <a href="#" class="fh5co-sub-ddown">Mens</a>
                     <ul class="fh5co-sub-menu">
                         <li><a href="products.asp?category=298">Tees</a></li>
                         <li><a href="products.asp?category=342">Corporate Range</a></li>
                     </ul>
-                </li>
+                </li>    
+                
                 <li>
                     <a href="#">Womens</a>
                     <ul class="fh5co-sub-menu">

@@ -126,7 +126,7 @@ End If
     <div class="container" style="padding: 0">
         <div class="divider" style="margin: 0 0 5rem 0"></div>
     </div> -->
-    
+
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -299,7 +299,7 @@ End If
 
         toastr.options = {
                 "closeButton": true,
-                "debug": true,
+                "debug": false,
                 "newestOnTop": false,
                 "progressBar": false,
                 "positionClass": "toast-center",

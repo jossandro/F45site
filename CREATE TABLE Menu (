@@ -1,0 +1,37 @@
+
+Drop Table aztectec_jddbo.Menu ;
+
+CREATE TABLE aztectec_jddbo.Menu (
+	menu_id int not null primary key identity(1,1),
+	title varchar(100) not null,
+	linkurl varchar(250),
+	linktarget varchar(30),
+	show_order int,
+	Cat_ID int,
+	menu_parent_id int 
+);
+
+ALTER TABLE aztectec_jddbo.Menu
+ADD CONSTRAINT FK_Menu_Category FOREIGN KEY (Cat_ID)
+    REFERENCES aztectec_jddbo.category(Cat_ID);
+
+ALTER TABLE aztectec_jddbo.Menu
+ADD CONSTRAINT FK_Menu_Parent FOREIGN KEY (menu_parent_id)
+    REFERENCES aztectec_jddbo.Menu(menu_id);
+
+
+
+
+
+WITH menus AS (
+SELECT *, 1 as menu_level
+FROM aztectec_jddbo.Menu m 
+WHERE m.menu_parent_id is null
+UNION ALL
+SELECT m2.*, mn.menu_level +1 AS menu_level
+FROM aztectec_jddbo.Menu m2 INNER JOIN menus AS mn ON m2.menu_parent_id = mn.menu_id
+WHERE m2.menu_parent_id is not null
+
+) SELECT * FROM menus
+
+
