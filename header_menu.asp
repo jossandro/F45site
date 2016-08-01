@@ -158,31 +158,34 @@ RSMenu.Open()
           
         <nav id="fh5co-menu-wrap" role="navigation" class="col-md-12 text-center">
             <ul class="sf-menu" id="fh5co-primary-menu">        <%
-                'While (NOT RSMenu.EOF)      %>
-                 <!--    <li class="active">
-                        <a href='<%=RSMenu.Fields.Item("menu_id").Value  %>' class="fh5co-sub-ddown">Mens</a>   -->      <%    
+                While (NOT RSMenu.EOF)      %>
+                    <li >         <%    
 
-'                        Set RSMenu2 = Server.CreateObject("ADODB.Recordset")
-'                        RSMenu2.ActiveConnection = MM_dbConnect_STRING
-'                        RSMenu2.Source = "SELECT * FROM Menu m WHERE m.menu_parent_id=" & RSMenu.Fields.Item("menu_id").Value
-'                        RSMenu2.CursorType = 0
-'                        RSMenu2.CursorLocation = 3
-'                        RSMenu2.LockType = 1
-'                        RSMenu2.Open()
+                        Set RSMenu2 = Server.CreateObject("ADODB.Recordset")
+                        RSMenu2.ActiveConnection = MM_dbConnect_STRING
+                        RSMenu2.Source = "SELECT * FROM Menu m WHERE m.menu_parent_id=" & RSMenu.Fields.Item("menu_id").Value
+                        RSMenu2.CursorType = 0
+                        RSMenu2.CursorLocation = 3
+                        RSMenu2.LockType = 1
+                        RSMenu2.Open()
 
-'                        if RSMenu2.RecordCount > 0 then         %>
-                            <!-- <ul class="fh5co-sub-menu">     -->     <%
-'                            While (NOT RSMenu2.EOF)             %>
-                               <!--  <li><a href="products.asp?category=298">Tees</a></li>  -->  <%
-'                            Wend        %>
-                         <!--    </ul> -->       <%
- '                       end if          %>
-                    <!-- </li>         -->       <%
-'                    RSMenu.MoveNext()
-'                Wend
+                        if RSMenu2.RecordCount > 0 then         %>
+                            <a href="<%=RSMenu.Fields.Item("linkurl").Value  %>" class="fh5co-sub-ddown"><%=RSMenu.Fields.Item("title").Value  %></a>
+                            <ul class="fh5co-sub-menu">          <%
+                            While (NOT RSMenu2.EOF)             %>
+                               <li><a href="<%=RSMenu2.Fields.Item("linkurl").Value  %>"><%=RSMenu2.Fields.Item("title").Value  %></a></li>    <%
+                               RSMenu2.MoveNext()
+                            Wend        %>
+                            </ul>        <%
+                        else
+                            %><a href="<%=RSMenu.Fields.Item("linkurl").Value  %>" ><%=RSMenu.Fields.Item("title").Value  %></a><%
+                        end if           %>
+                     </li>               <%
+                    RSMenu.MoveNext()
+                Wend
                 %>
                 
-                <li class="active">
+                <!-- <li class="active">
                     <a href="#" class="fh5co-sub-ddown">Mens</a>
                     <ul class="fh5co-sub-menu">
                         <li><a href="products.asp?category=298">Tees</a></li>
@@ -210,7 +213,7 @@ RSMenu.Open()
                         <li><a href="products.asp?category=354">Hoodies + Trackpants</a></li>
                         <li><a href="products.asp?category=300">Tanks - Unisex</a></li>
                     </ul>
-                </li>
+                </li> -->
         </nav>
     </div>
 </header>

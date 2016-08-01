@@ -146,8 +146,8 @@
                 <h1>Newsletter</h1>
             </div>
             <div class="col-md-4 cols-sm-12">
-                <p>If You Are Unable To Load Any Pages,</p>
-                <p>Check Your Computer.</p>
+                <!-- <p>If You Are Unable To Load Any Pages,</p>
+                <p>Check Your Computer.</p> -->
             </div>
             <div class="col-md-6 cols-sm-12">
                 <form action="">
