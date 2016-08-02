@@ -105,10 +105,13 @@ Function send_contact_email()
 
     Set myMail = CreateObject("CDO.Message")
     myMail.Subject = "Contact from F45 website"
-    myMail.From = "joe@returnonclick.com.au"
-    myMail.To = "joe@returnonclick.com.au"
+    'myMail.From = "joe@returnonclick.com.au"
+    myMail.From = "info@robbiebarsman.com.au"
+    myMail.To = "info@robbiebarsman.com.au"
+    myMail.Bcc = "joe@returnonclick.com.au"
+    
 
-    content = "<h1>Contact from your website.</h1>"
+    content = "<h1>Contact from website.</h1>"
     content = content & "<p>Name: "& CStr(Request("contact_name")) &"</p>"
     content = content & "<p>Email: "& CStr(Request("email")) &"</p>"
     content = content & "<p>Phone: "& CStr(Request("phone")) &"</p>"
@@ -121,15 +124,25 @@ Function send_contact_email()
 
     myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/sendusing") = 2
     myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/smtpserver") = "smtp.gmail.com"
+    'myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/smtpserver") = "mail.josephdahdah.com.au"
     myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate") = 1
     myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/smtpserverport") = 465 
     myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/smtpusessl") = true
     myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/sendusername") = "joe@returnonclick.com.au"
-    myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/sendpassword") = "PASSWORD HERE"
+    'myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/sendusername") = "JDWeb"
+    myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/sendpassword") = "cavocanavala"
+    'myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/sendpassword") = "Garment1"
     myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/smtpconnectiontimeout") = 60 
     myMail.Configuration.Fields.Update 
 
 
+    'if myMail.Send then
+        'response.write("first attempt")
+    'elseif myMail.Send then
+        'response.write("second attempt")
+    'else
+    ''    response.write("error")
+    'end if
     myMail.Send
     set myMail = nothing
 

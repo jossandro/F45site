@@ -149,38 +149,52 @@ RSMenu.Open()
         </div>
         <!-- START #fh5co-menu-wrap -->
         <% 
-        Dim   cat_title
-        Dim dept
+        Dim cat_title
+        Dim dept, active 
         Cat_title = ""
         dept = 1
-
+        dim currentPage
+        dim linkFromDB, menu2
                 %>
           
         <nav id="fh5co-menu-wrap" role="navigation" class="col-md-12 text-center">
             <ul class="sf-menu" id="fh5co-primary-menu">        <%
-                While (NOT RSMenu.EOF)      %>
-                    <li >         <%    
+                While (NOT RSMenu.EOF)      
 
-                        Set RSMenu2 = Server.CreateObject("ADODB.Recordset")
-                        RSMenu2.ActiveConnection = MM_dbConnect_STRING
-                        RSMenu2.Source = "SELECT * FROM Menu m WHERE m.menu_parent_id=" & RSMenu.Fields.Item("menu_id").Value
-                        RSMenu2.CursorType = 0
-                        RSMenu2.CursorLocation = 3
-                        RSMenu2.LockType = 1
-                        RSMenu2.Open()
-
-                        if RSMenu2.RecordCount > 0 then         %>
-                            <a href="<%=RSMenu.Fields.Item("linkurl").Value  %>" class="fh5co-sub-ddown"><%=RSMenu.Fields.Item("title").Value  %></a>
-                            <ul class="fh5co-sub-menu">          <%
-                            While (NOT RSMenu2.EOF)             %>
-                               <li><a href="<%=RSMenu2.Fields.Item("linkurl").Value  %>"><%=RSMenu2.Fields.Item("title").Value  %></a></li>    <%
-                               RSMenu2.MoveNext()
-                            Wend        %>
-                            </ul>        <%
-                        else
-                            %><a href="<%=RSMenu.Fields.Item("linkurl").Value  %>" ><%=RSMenu.Fields.Item("title").Value  %></a><%
-                        end if           %>
-                     </li>               <%
+                    Set RSMenu2 = Server.CreateObject("ADODB.Recordset")
+                    RSMenu2.ActiveConnection = MM_dbConnect_STRING
+                    RSMenu2.Source = "SELECT * FROM Menu m WHERE m.menu_parent_id=" & RSMenu.Fields.Item("menu_id").Value
+                    RSMenu2.CursorType = 0
+                    RSMenu2.CursorLocation = 3
+                    RSMenu2.LockType = 1
+                    RSMenu2.Open()
+                    active = ""
+                    currentPage = trim(Request.ServerVariables("url") &"?"& Request.QueryString)
+                    linkFromDB = RSMenu.Fields.Item("linkurl").Value 
+                    If InStr(1, currentPage, linkFromDB) > 0 then
+                        active = " class=""active"" "
+                    end if
+                    if RSMenu2.RecordCount > 0 then         
+                        menu2 = "<ul class=""fh5co-sub-menu""> "
+                        While (NOT RSMenu2.EOF)              
+                            linkFromDB = RSMenu2.Fields.Item("linkurl").Value 
+                            menu2 = menu2 & "<li><a href=""" & RSMenu2.Fields.Item("linkurl").Value & """>"& RSMenu2.Fields.Item("title").Value & "</a></li> "
+                            If InStr(1, currentPage, linkFromDB) > 0 then
+                                active = " class=""active"" "
+                            end if
+                            RSMenu2.MoveNext()
+                        Wend
+                        menu2 = menu2 & "</ul> "        %>
+                        <li <%=active%> >            
+                            <a href="<%=RSMenu.Fields.Item("linkurl").Value %>" class="fh5co-sub-ddown"><%=RSMenu.Fields.Item("title").Value %></a>
+                            <%=menu2 %>
+                    <% else
+                        %><li <%=active%>><a href="<%=RSMenu.Fields.Item("linkurl").Value  %>" ><%=RSMenu.Fields.Item("title").Value  %></a><%
+                    end if
+                    'response.write(linkFromDB)
+                               %>
+                    </li>               <%
+                    
                     RSMenu.MoveNext()
                 Wend
                 %>
