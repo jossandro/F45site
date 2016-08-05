@@ -25,7 +25,7 @@ RSClient1_numRows = 0
 ' "WITH menus AS ( SELECT *, 1 as menu_level FROM aztectec_jddbo.Menu m WHERE m.menu_parent_id is null UNION ALL SELECT m2.*, mn.menu_level +1 AS menu_level FROM aztectec_jddbo.Menu m2 INNER JOIN menus AS mn ON m2.menu_parent_id = mn.menu_id WHERE m2.menu_parent_id is not null) SELECT * FROM menus "
 
 Dim sqlMneu
-sqlMenu = "SELECT * FROM Menu m WHERE m.menu_parent_id is null "
+sqlMenu = "SELECT * FROM Menu m WHERE m.menu_parent_id is null ORDER BY show_order "
 
 Set RSMenu = Server.CreateObject("ADODB.Recordset")
 RSMenu.ActiveConnection = MM_dbConnect_STRING 
@@ -101,9 +101,9 @@ RSMenu.Open()
             <div class="col-md-5 pull-left">
                 <nav id="fh5co-sliding-nav-left" role="navigation">
                     <ul>
-                        <li><a href="#">F45 Training</a></li>
+                        <li><a href="http://f45training.com.au/" target="_blank">F45 Training</a></li>
                         <li><a href="contactus.asp">Contact Us</a></li>
-                        <li><a href="#">Support</a></li>
+                        <!-- <li><a href="#">Support</a></li> -->
                     </ul>
                 </nav>
             </div>
@@ -142,6 +142,10 @@ RSMenu.Open()
                                 <% End If %>
                             </a>
                         </li>
+                        <li><a href="login.asp?logout=yes" alt="logout">
+                            <span class="icon-sign-out"></span>
+                            <span class="visuallyhidden">Logout</span>
+                        </a></li>
                     </ul>
                 </nav>
             </div>
@@ -163,7 +167,7 @@ RSMenu.Open()
 
                     Set RSMenu2 = Server.CreateObject("ADODB.Recordset")
                     RSMenu2.ActiveConnection = MM_dbConnect_STRING
-                    RSMenu2.Source = "SELECT * FROM Menu m WHERE m.menu_parent_id=" & RSMenu.Fields.Item("menu_id").Value
+                    RSMenu2.Source = "SELECT * FROM Menu m WHERE m.menu_parent_id=" & RSMenu.Fields.Item("menu_id").Value & " ORDER BY show_order"
                     RSMenu2.CursorType = 0
                     RSMenu2.CursorLocation = 3
                     RSMenu2.LockType = 1

@@ -107,14 +107,14 @@ RSProduct_qtd = RSProduct.RecordCount
 RSProduct_numRows = 0
 
 ' Set the page size of the recordset
-RSProduct.PageSize = 8   ' nItemsPerPage
+'RSProduct.PageSize = 8   ' nItemsPerPage
 ' Get the number of pages
-nPageCount = RSProduct.PageCount
+'nPageCount = RSProduct.PageCount
 
-nPage = CLng(Request.QueryString("page"))
-If nPage < 1 Or nPage > nPageCount Then
-    nPage = 1
-End If
+'nPage = CLng(Request.QueryString("page"))
+'If nPage < 1 Or nPage > nPageCount Then
+'    nPage = 1
+'End If
 
 %>
 <%
@@ -404,8 +404,8 @@ End Function
                     Dim col_count
                     col_count = 0 
                     
-                    RSProduct.AbsolutePage = nPage
-                    Do While Not ( RSProduct.Eof Or RSProduct.AbsolutePage <> nPage )
+                    'RSProduct.AbsolutePage = nPage                 'pagination deactivated
+                    Do While Not ( RSProduct.Eof  )                 'Or RSProduct.AbsolutePage <> nPage
                         Cat_title = RSProduct.Fields.Item("Description").value   
                         dim prodName
                         If RSProduct.Fields.Item("Custom").Value <> "" Then 
@@ -462,33 +462,33 @@ End Function
                     strPath= Request.ServerVariables("SCRIPT_NAME") 
                     strQueryString= Request.ServerVariables("QUERY_STRING")
 
-                    if(nPage < nPageCount) then
-                        strNextPageUrl = "page="& nPage + 1
-                    else
-                        strNextPageUrl = "page="& nPage    
-                        nextpaginactive = " paginactive"
-                    end if
+                    'if(nPage < nPageCount) then
+                    '    strNextPageUrl = "page="& nPage + 1
+                    'else
+                    '    strNextPageUrl = "page="& nPage    
+                    '    nextpaginactive = " paginactive"
+                    'end if
                     
-                    if(nPage > 1) then
-                        strPrevPageUrl = "page="& nPage - 1
-                    else
-                        strPrevPageUrl = "page="& nPage    
-                        prevpaginactive = " paginactive"
-                    end if
-                    dim strfind
-                    strfind = "page="& nPage
-                    If Len(strQueryString) > 0 Then
-                        if( Len(Request.QueryString("Page")) > 0 ) then
-                            strNextUrl = strPath & "?" & replace(strQueryString, strfind, strNextPageUrl)
-                            strPrevUrl = strPath & "?" & replace(strQueryString, strfind, strPrevPageUrl)
-                        else
-                            strNextUrl = strPath & "?" & strQueryString & "&" & strNextPageUrl
-                            strPrevUrl = strPath & "?" & strQueryString & "&" & strPrevPageUrl
-                        end if
-                    else 
-                       strNextUrl = strPath & "?" & strNextPageUrl
-                       strPrevUrl = strPath & "?" & strPrevPageUrl
-                    End If
+                    'if(nPage > 1) then
+                    '    strPrevPageUrl = "page="& nPage - 1
+                    'else
+                    '    strPrevPageUrl = "page="& nPage    
+                    '    prevpaginactive = " paginactive"
+                    'end if
+                    'dim strfind
+                    'strfind = "page="& nPage
+                    'If Len(strQueryString) > 0 Then
+                    '    if( Len(Request.QueryString("Page")) > 0 ) then
+                    '        strNextUrl = strPath & "?" & replace(strQueryString, strfind, strNextPageUrl)
+                    '        strPrevUrl = strPath & "?" & replace(strQueryString, strfind, strPrevPageUrl)
+                    '    else
+                    '        strNextUrl = strPath & "?" & strQueryString & "&" & strNextPageUrl
+                    '        strPrevUrl = strPath & "?" & strQueryString & "&" & strPrevPageUrl
+                    '    end if
+                    'else 
+                    '   strNextUrl = strPath & "?" & strNextPageUrl
+                    '   strPrevUrl = strPath & "?" & strPrevPageUrl
+                    'End If
 
                     %>
                     <!--                     
@@ -503,8 +503,8 @@ End Function
                     ' 15th page:
                     Response.Write "<A HREF=""results.asp?Keyword=" & Keyword & "&Page=15"">15th Page</A>"
                      -->
-                    <a class="btn btn-filters <%=prevpaginactive%>" href="<%=strPrevUrl %>">< PREV</a>
-                    <a class="btn btn-filters <%=nextpaginactive%>" href="<%=strNextUrl %>">NEXT ></a>
+                    <!-- <a class="btn btn-filters <%=prevpaginactive%>" href="<%=strPrevUrl %>">< PREV</a>
+                    <a class="btn btn-filters <%=nextpaginactive%>" href="<%=strNextUrl %>">NEXT ></a> -->
                 </div>
             </div>
         </div>
