@@ -81,7 +81,7 @@
                         <div class="col-md-12 cols-sm-12">
                             <div class="line"></div>
                             <ul class="pages-footer">
-                                <li><a href="#">Seller Login</a></li>
+                                <li><a href="login.asp">Seller Login</a></li>
                                 <li><a href="#">Seller Sign Up</a></li>
                                 <li><a href="#">Seller Handbook</a></li>
                                 <li><a href="#">Seller Control Panel</a></li>

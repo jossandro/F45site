@@ -25,7 +25,12 @@ RSClient1_numRows = 0
 ' "WITH menus AS ( SELECT *, 1 as menu_level FROM aztectec_jddbo.Menu m WHERE m.menu_parent_id is null UNION ALL SELECT m2.*, mn.menu_level +1 AS menu_level FROM aztectec_jddbo.Menu m2 INNER JOIN menus AS mn ON m2.menu_parent_id = mn.menu_id WHERE m2.menu_parent_id is not null) SELECT * FROM menus "
 
 Dim sqlMneu
-sqlMenu = "SELECT * FROM Menu m WHERE m.menu_parent_id is null ORDER BY show_order "
+
+If Not MM_grantAccess Then
+    sqlMenu = "SELECT * FROM Menu m WHERE m.menu_parent_id=15 ORDER BY show_order "
+else
+    sqlMenu = "SELECT * FROM Menu m WHERE m.menu_parent_id=14 ORDER BY show_order "
+end if
 
 Set RSMenu = Server.CreateObject("ADODB.Recordset")
 RSMenu.ActiveConnection = MM_dbConnect_STRING 
@@ -120,32 +125,36 @@ RSMenu.Open()
                         <li><a href="updatecustomerinfo.asp" alt="profile">
                             <span class="icon-user"></span>
                             <span class="visuallyhidden">Login</span>
-                        </a></li>
-                        <li> <% 
-                            Dim Check_cart
-                            Check_cart = 0
-                            For Each strKeyname in Request.Cookies("splat") 
-                                if Request.Cookies("splat")(strKeyname) <> "" then
-                                    Check_cart = Check_cart + 1
-                                End If
-                            Next
-                            
+                        </a></li>   <%
+                        If MM_grantAccess Then          %>
 
-                            %>
-                            
-                            <a href="view_order.asp">
-                                <span class="icon-shopping-cart"></span>
-                                <span class="visuallyhidden">Shopping</span>
-                                <%
-                                If Check_cart>0 Then %>
-                                    <span class="label"><%= Check_cart  %></span> 
-                                <% End If %>
-                            </a>
-                        </li>
-                        <li><a href="login.asp?logout=yes" alt="logout">
-                            <span class="icon-sign-out"></span>
-                            <span class="visuallyhidden">Logout</span>
-                        </a></li>
+
+                            <li> <% 
+                                Dim Check_cart
+                                Check_cart = 0
+                                For Each strKeyname in Request.Cookies("splat") 
+                                    if Request.Cookies("splat")(strKeyname) <> "" then
+                                        Check_cart = Check_cart + 1
+                                    End If
+                                Next
+                                
+
+                                %>
+                                
+                                <a href="view_order.asp">
+                                    <span class="icon-shopping-cart"></span>
+                                    <span class="visuallyhidden">Shopping</span>
+                                    <%
+                                    If Check_cart>0 Then %>
+                                        <span class="label"><%= Check_cart  %></span> 
+                                    <% End If %>
+                                </a>
+                            </li>
+                            <li><a href="login.asp?logout=yes" alt="logout">
+                                <span class="icon-sign-out"></span>
+                                <span class="visuallyhidden">Logout</span>
+                            </a></li><% 
+                        end if    %>
                     </ul>
                 </nav>
             </div>

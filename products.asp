@@ -432,14 +432,20 @@ End Function
                         %>
                         <div class="products col-md-3 animate-box">
                             <!-- <span class="featured sale"><small>Sale</small></span> -->
-                            <a href="order.asp?ID=<%= RSProduct.Fields.Item("ID").Value %>&dept=<%= dept %>">
+                            <%
+                            If MM_grantAccess Then              %>
+                                <a href="order.asp?ID=<%= RSProduct.Fields.Item("ID").Value %>&dept=<%= dept %>">
+                            <% end if %>
                             <figure >
                                 <img class="img-responsive" style="max-width:100%;" src="../databases/images/<%=(RSProduct.Fields.Item("lgimage").Value)%>" alt="">
                             </figure>
                             <p class="item-name"><%=prodName%></p>
                             <p class="item-category"><small><%=(ucase(left(Cat_title,1)) & lcase(mid(Cat_title,2)))%></small></p>
                             <p class="item-price">$<%=(RSProduct.Fields.Item("PriceInc").Value)%> <span class="icon-star-half-empty pull-right"></span></p>
-                            </a>
+                            <%
+                            If MM_grantAccess Then              %>
+                                </a>
+                            <% end if%>
                         </div>      <%
 
                         RSProduct.MoveNext

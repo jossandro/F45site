@@ -43,12 +43,18 @@
     <%
     Dim RSProduct
     Dim RSProduct_numRows
+    Dim product_sql
+    If Not MM_grantAccess Then
+        product_sql = "SELECT TOP 12 ep.*, p.lgimage FROM extend_products ep INNER JOIN products p ON p.ID = ep.ID INNER JOIN category c ON ep.Cat_ID = c.Cat_ID WHERE c.client_ID = 110 ORDER BY NEWID() "
+    else
+        product_sql = "SELECT TOP 12 ep.*, p.lgimage FROM extend_products ep INNER JOIN products p ON p.ID = ep.ID INNER JOIN category c ON ep.Cat_ID = c.Cat_ID WHERE c.client_ID = 99 ORDER BY NEWID() "
+    end if
 
     Set RSProduct = Server.CreateObject("ADODB.Recordset")
     RSProduct.ActiveConnection = MM_dbConnect_STRING
     'RSProduct.Source = "SELECT * FROM extend_products WHERE Cat_ID = " + Replace(RSProduct__MMColParam, "'", "''") + " ORDER BY listp, Description ASC"
-    'RSProduct.Source = "SELECT top 12 * FROM products "
-    RSProduct.Source = "SELECT TOP 12 ep.*, p.lgimage FROM extend_products ep INNER JOIN products p ON p.ID = ep.ID INNER JOIN category c ON ep.Cat_ID = c.Cat_ID WHERE c.client_ID = 99 ORDER BY NEWID() "   ' WHERE ep.Cat_ID = 300"
+    'RSProduct.Source = "SELECT top 12 * FROM products "            ' WHERE ep.Cat_ID = 300"
+    RSProduct.Source =  product_sql  
     RSProduct.CursorType = 0
     RSProduct.CursorLocation = 2
     RSProduct.LockType = 1
@@ -87,14 +93,20 @@
                 %>
                 <div class="products col-md-3 animate-box">
                     <!-- <span class="featured sale"><small>Sale</small></span> -->
-                    <a href="order.asp?ID=<%= RSProduct.Fields.Item("ID").Value %>&dept=<%= dept %>">
+                    <%
+                    If MM_grantAccess Then              %>
+                        <a href="order.asp?ID=<%= RSProduct.Fields.Item("ID").Value %>&dept=<%= dept %>">
+                    <% end if   %>
                         <figure>
                             <img class="img-responsive" src="../databases/images/<%=(RSProduct.Fields.Item("lgimage").Value)%>" alt="">
                         </figure>
                         <p class="item-name"><%=prodName%></p>
                         <p class="item-category"><small><%=(ucase(left(Cat_title,1)) & lcase(mid(Cat_title,2)))%></small></p>
                         <p class="item-price">$<%=(RSProduct.Fields.Item("PriceInc").Value)%></p>
+                    <%
+                   If MM_grantAccess Then              %>
                     </a>
+                <% end If       %>
                 </div>      <%
                 RSProduct.MoveNext()
             Wend

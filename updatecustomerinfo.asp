@@ -3,6 +3,18 @@
 
 <!--#include file="../Connections/dbConnect.asp" -->
 <%
+
+If Not MM_grantAccess Then
+  MM_qsChar = "?"
+  If (InStr(1,MM_authFailedURL,"?") >= 1) Then MM_qsChar = "&"
+  MM_referrer = Request.ServerVariables("URL")
+  if (Len(Request.QueryString()) > 0) Then MM_referrer = MM_referrer & "?" & Request.QueryString()
+  MM_authFailedURL = MM_authFailedURL & MM_qsChar & "accessdenied=" & Server.URLEncode(MM_referrer)
+  Response.Redirect(MM_authFailedURL)
+End If
+
+
+
 Dim MM_editAction
 MM_editAction = CStr(Request.ServerVariables("SCRIPT_NAME"))
 If (Request.QueryString <> "") Then

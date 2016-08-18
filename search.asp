@@ -23,12 +23,20 @@ RSProduct.ActiveConnection = MM_dbConnect_STRING
 
 Dim query
 Dim sqlCode
+Dim clientID
+If Not MM_grantAccess Then
+    clientID = 110
+else
+    clientID = 99
+end if
+
+
 query = ""
-sqlCode = "SELECT TOP 12 ep.*, p.lgimage FROM extend_products ep INNER JOIN products p ON p.ID = ep.ID INNER JOIN category c ON ep.Cat_ID = c.Cat_ID WHERE c.client_ID = 99 ORDER BY NEWID() "
+sqlCode = "SELECT TOP 12 ep.*, p.lgimage FROM extend_products ep INNER JOIN products p ON p.ID = ep.ID INNER JOIN category c ON ep.Cat_ID = c.Cat_ID WHERE c.client_ID = "&clientID&" ORDER BY NEWID() "
 'and CheckStringForSQL(Request.Form("q"))
 If (len(Request.Form("q")) > 2 ) Then 
   query = Replace(Request.Form("q"),"'"," ")
-  sqlCode = "SELECT ep.*, p.lgimage FROM extend_products ep INNER JOIN products p ON p.ID = ep.ID INNER JOIN category c ON ep.Cat_ID = c.Cat_ID WHERE c.client_ID = 99 AND (ep.expr1 like '%"+query+"%' OR ep.Description like '%"+query+"%' OR ep.custom like '%"+query+"%' OR ep.custom_desc like '%"+query+"%' ) ORDER BY listp, Custom ASC"
+  sqlCode = "SELECT ep.*, p.lgimage FROM extend_products ep INNER JOIN products p ON p.ID = ep.ID INNER JOIN category c ON ep.Cat_ID = c.Cat_ID WHERE c.client_ID = "& clientID &" AND (ep.expr1 like '%"+query+"%' OR ep.Description like '%"+query+"%' OR ep.custom like '%"+query+"%' OR ep.custom_desc like '%"+query+"%' ) ORDER BY listp, Custom ASC"
 End If
 
 RSProduct.Source = sqlCode
@@ -117,14 +125,20 @@ qtdResults = RSProduct.RecordCount
                 %>
                 <div class="products col-md-3 animate-box">
                     <!-- <span class="featured sale"><small>Sale</small></span> -->
-                    <a href="order.asp?ID=<%= RSProduct.Fields.Item("ID").Value %>&dept=<%= dept %>">
+                    <%
+                    If MM_grantAccess Then              %>
+                        <a href="order.asp?ID=<%= RSProduct.Fields.Item("ID").Value %>&dept=<%= dept %>">
+                    <% end if       %>
                         <figure>
                             <img class="img-responsive" src="../databases/images/<%=(RSProduct.Fields.Item("lgimage").Value)%>" alt="">
                         </figure>
                         <p class="item-name"><%=prodName%></p>
                         <p class="item-category"><small><%=(ucase(left(Cat_title,1)) & lcase(mid(Cat_title,2)))%></small></p>
                         <p class="item-price">$<%=(RSProduct.Fields.Item("PriceInc").Value)%></p>
-                    </a>
+                    <%
+                    If MM_grantAccess Then              %>
+                        </a>
+                    <% end if   %>
                 </div>      <%
                 RSProduct.MoveNext()
             Wend
