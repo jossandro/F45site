@@ -96,6 +96,8 @@
                     <%
                     If MM_grantAccess Then              %>
                         <a href="order.asp?ID=<%= RSProduct.Fields.Item("ID").Value %>&dept=<%= dept %>">
+                    <% else %>
+                        <a href="login.asp">
                     <% end if   %>
                         <figure>
                             <img class="img-responsive" src="../databases/images/<%=(RSProduct.Fields.Item("lgimage").Value)%>" alt="">
@@ -104,7 +106,7 @@
                         <p class="item-category"><small><%=(ucase(left(Cat_title,1)) & lcase(mid(Cat_title,2)))%></small></p>
                         <p class="item-price">$<%=(RSProduct.Fields.Item("PriceInc").Value)%></p>
                     <%
-                   If MM_grantAccess Then              %>
+                   If MM_grantAccess or true Then              %>
                     </a>
                 <% end If       %>
                 </div>      <%
