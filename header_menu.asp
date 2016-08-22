@@ -26,7 +26,7 @@ RSClient1_numRows = 0
 
 Dim sqlMneu
 
-If Not MM_grantAccess Then
+If Not MM_grantAccess or Session("client_ID") <> "99"  Then
     sqlMenu = "SELECT * FROM Menu m WHERE m.menu_parent_id=15 ORDER BY show_order "
 else
     sqlMenu = "SELECT * FROM Menu m WHERE m.menu_parent_id=14 ORDER BY show_order "

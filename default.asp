@@ -47,7 +47,7 @@
     If Not MM_grantAccess Then
         product_sql = "SELECT TOP 12 ep.*, p.lgimage FROM extend_products ep INNER JOIN products p ON p.ID = ep.ID INNER JOIN category c ON ep.Cat_ID = c.Cat_ID WHERE c.client_ID = 110 ORDER BY NEWID() "
     else
-        product_sql = "SELECT TOP 12 ep.*, p.lgimage FROM extend_products ep INNER JOIN products p ON p.ID = ep.ID INNER JOIN category c ON ep.Cat_ID = c.Cat_ID WHERE c.client_ID = 99 ORDER BY NEWID() "
+        product_sql = "SELECT TOP 12 ep.*, p.lgimage FROM extend_products ep INNER JOIN products p ON p.ID = ep.ID INNER JOIN category c ON ep.Cat_ID = c.Cat_ID WHERE c.client_ID = "&Session("client_ID")&" ORDER BY NEWID() "
     end if
 
     Set RSProduct = Server.CreateObject("ADODB.Recordset")
@@ -104,7 +104,7 @@
                         </figure>
                         <p class="item-name"><%=prodName%></p>
                         <p class="item-category"><small><%=(ucase(left(Cat_title,1)) & lcase(mid(Cat_title,2)))%></small></p>
-                        <p class="item-price">$<%=(RSProduct.Fields.Item("PriceInc").Value)%></p>
+                        <p class="item-price"><%=FormatCurrency((RSProduct.Fields.Item("PriceInc").Value), 2, -2, -2, -2)%></p>
                     <%
                    If MM_grantAccess or true Then              %>
                     </a>

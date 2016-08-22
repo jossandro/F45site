@@ -237,7 +237,7 @@ End Function
                 <h6></h6>
             </div>
             <div class="col-md-6">
-                <h6><%=RSProduct_qtd  %> ITENS</h6>
+                <h6><%=RSProduct_qtd  %> ITENS - <%=Session("client_ID")%></h6>
             </div>
         </div>
     </div>
@@ -443,7 +443,7 @@ End Function
                             </figure>
                             <p class="item-name"><%=prodName%></p>
                             <p class="item-category"><small><%=(ucase(left(Cat_title,1)) & lcase(mid(Cat_title,2)))%></small></p>
-                            <p class="item-price">$<%=(RSProduct.Fields.Item("PriceInc").Value)%> <span class="icon-star-half-empty pull-right"></span></p>
+                            <p class="item-price"><%= FormatCurrency((RSProduct.Fields.Item("PriceInc").Value), 2, -2, -2, -2) %> <span class="icon-star-half-empty pull-right"></span></p>
                             <%
                             If MM_grantAccess or true Then              %>
                                 </a>
