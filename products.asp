@@ -237,7 +237,7 @@ End Function
                 <h6></h6>
             </div>
             <div class="col-md-6">
-                <h6><%=RSProduct_qtd  %> ITENS - <%=Session("client_ID")%></h6>
+                <h6><%=RSProduct_qtd  %> ITENS </h6>
             </div>
         </div>
     </div>

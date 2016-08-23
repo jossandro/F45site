@@ -195,8 +195,8 @@
       MM_editConnection = MM_dbConnect_STRING
       MM_editTable = "Customers"
       MM_editRedirectUrl = "register1.asp"
-      MM_fieldsStr  = "Client_ID|value|Cust_Name|value|Account|value|Phone|value|Fax|value|Store_Address|value|Store_Suburb|value|Store_State|value|Store_Country|value|Store_Postcode|value|Delivery_Address|value|Delivery_Suburb|value|Delivery_State|value|Delivery_Country|value|Delivery_Postcode|value|contact|value|email|value|userid|value|passwd|value"
-      MM_columnsStr = "Client_ID|none,none,NULL|Cust_Name|',none,''|Account|',none,''|Phone|',none,''|Fax|',none,''|Store_Address|',none,''|Store_Suburb|',none,''|Store_State|',none,''|Store_Country|',none,''|Store_Postcode|',none,''|Delivery_Address|',none,''|Delivery_Suburb|',none,''|Delivery_State|',none,''|Delivery_Country|',none,''|Delivery_Postcode|',none,''|contact|',none,''|email|',none,''|userid|',none,''|passwd|',none,''"
+      MM_fieldsStr  = "Client_ID|value|Cust_Name|value|Account|value|Phone|value|Fax|value|Store_Address|value|Store_Suburb|value|Store_State|value|Store_Country|value|Store_Postcode|value|Delivery_Address|value|Delivery_Suburb|value|Delivery_State|value|Delivery_Country|value|Delivery_Postcode|value|contact|value|email|value|userid|value|passwd|value|payment|value|enable|value|online|value"
+      MM_columnsStr = "Client_ID|none,none,NULL|Cust_Name|',none,''|Account|',none,''|Phone|',none,''|Fax|',none,''|Store_Address|',none,''|Store_Suburb|',none,''|Store_State|',none,''|Store_Country|',none,''|Store_Postcode|',none,''|Delivery_Address|',none,''|Delivery_Suburb|',none,''|Delivery_State|',none,''|Delivery_Country|',none,''|Delivery_Postcode|',none,''|contact|',none,''|email|',none,''|userid|',none,''|passwd|',none,''|payment|none,none,1|enable|none,none,1|online|none,none,1"
     
       ' create the MM_fields and MM_columns arrays
       MM_fields = Split(MM_fieldsStr, "|")
@@ -265,6 +265,8 @@
         Next
         
         MM_editQuery = "insert into " & MM_editTable & " (" & MM_tableValues & ") values (" & MM_dbValues & ")"
+
+        response.write(MM_editQuery)
       
         If (Not MM_abortEdit) Then
             ' execute the insert
@@ -432,7 +434,7 @@
 
                 <form action="<%=MM_editAction%>" method="POST" name="form1" onSubmit="MM_validateForm('Cust_Name','','R','Account','','R','Phone','','R','Store_Address','','R','Store_Suburb','','R','Store_State','','R','Store_Postcode','','R','Delivery_Address','','R','Delivery_Suburb','','R','Delivery_State','','R','Delivery_Postcode','','R','contact','','R','email','','RisEmail','userid','','R','passwd','','R','passwd1','','R');return document.MM_returnValue" >
 
-                <input name="Client_ID" type="hidden" value="4">
+                <input name="Client_ID" type="hidden" value="110">
 
                     <fieldset class="form-group  col-md-12 col-sm-12 col-xs-12">
                         <label for="Cust_Name">Customer Name</label>
