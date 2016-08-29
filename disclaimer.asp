@@ -102,16 +102,17 @@ If (CStr(Request("MM_insert")) <> "") And (CStr(Request("ordstatus")) <> "Cancel
 	  		RSEmail.Close()
 	  		RSClient.Close()
 	  		Response.Redirect(UC_redirectPage)
+	  		' "<input type='text' name='merchant_id' value='23622780' />" &_
 
   		ElseIf (CStr(Request("ordstatus")) = "Pending Payment") Then 'online ordering selected
 			Dim html
 			html = "<html><body><div style='visibility:hidden'><form method='post' action='https://www.payway.com.au/MakePayment' name='wespac'>" &_
 			"<input type='text' name='biller_code' value='125922' />" &_
-			"<input type='text' name='merchant_id' value='23622780' />" &_
-		   "<input type='text' name='payment_reference' value='" & Session("orderid") & "' />" &_
+			"<input type='text' name='merchant_id' value='TEST' />" &_
+		    "<input type='text' name='payment_reference' value='" & Session("orderid") & "' />" &_
 			"<input type='text' name='payment_reference_text' value='Order Id' />" &_
 			"<input type='text' name='Client_ID' value='" & (RsCust.Fields.Item("Client_ID").Value) & "'/>" &_
-		   "<input type='text' name='information_fields' value='Client_ID' />" &_
+		    "<input type='text' name='information_fields' value='Client_ID' />" &_
 			"<input type='text' name='Cust_Name' value='" & (RsCust.Fields.Item("Cust_Name").Value) & "'  />" &_
 			"<input type='text' name='information_fields' value='Cust_Name' />"  &_
 			"<input type='text' name='Account' value='" & (RsCust.Fields.Item("Account").Value) & "'  />" &_
@@ -301,30 +302,29 @@ function check_i_agree()
     End If
 	 Dim ordstatus_value 
 	 ordstatus_value = "Payment Required"
- 	If online Then  %> 
- 		<input type="submit" name="submit1" value="Continue -  Pay by Credit Card"  onClick="setstatus_pend(this.form)">   
-		<% If payment Then  %> 
-  			<input type="submit" name="submit1" value="Continue -  Generate Order " onClick="setstatus_gen(this.form)"> 
-  		<% End If %> 
- <% Else %>  
- 		<input type="submit" name="submit" value="Continue -  Generate Order"  onClick="setstatus_gen(this.form)">    
-	<% End If %>
-
-          <input type="hidden" name="user" value="<%= Session("svuser") %>">
-          <input type="hidden" name="refnumber" value="<%= Session("orderid") %>">
-          <input type="hidden" name="MM_insert" value="true">
-	  <input type="hidden" name="ordstatus" value="<%= ordstatus_value %>">
-	  <input type="hidden" name="purchase_order" value="<%= CStr(Request("purchase_order")) %>">
-	  <input type="hidden" name="building" value="<%= CStr(Request("building")) %>">
-	  <input type="hidden" name="employee" value="<%= CStr(Request("employee")) %>">
-	  <input type="hidden" name="Comment" value="<%= CStr(Request("Comment")) %>">
-	  <input type="hidden" name="Address" value="<%= Request("Address") %>">
-	  <input type="hidden" name="Total" value="<%= Request("Total") %>">
-	  <input type="hidden" name="Delivery" value="<%= Request("Delivery") %>">
-    <input type="hidden" name="promo_disc" value="<%= Request("promo_disc") %>" />
-      <input type="submit" name="cancel" value="Cancel" onClick="cancelOrder(this.form)">
-    <input type="hidden" name="Pickup" value="<%= Request("Pickup") %>" />
-          </form>
+	If online Then  %> 
+		<input type="submit" name="submit1" value="Continue -  Pay by Credit Card"  onClick="setstatus_pend(this.form)">   <% 
+		If payment Then  %> 
+			<input type="submit" name="submit1" value="Continue -  Generate Order " onClick="setstatus_gen(this.form)"> 	<% 
+		End If 
+	Else %>  
+		<input type="submit" name="submit" value="Continue -  Generate Order"  onClick="setstatus_gen(this.form)">    <% 
+	End If 		%>
+		<input type="hidden" name="user" value="<%= Session("svuser") %>">
+		<input type="hidden" name="refnumber" value="<%= Session("orderid") %>">
+		<input type="hidden" name="MM_insert" value="true">
+		<input type="hidden" name="ordstatus" value="<%= ordstatus_value %>">
+		<input type="hidden" name="purchase_order" value="<%= CStr(Request("purchase_order")) %>">
+		<input type="hidden" name="building" value="<%= CStr(Request("building")) %>">
+		<input type="hidden" name="employee" value="<%= CStr(Request("employee")) %>">
+		<input type="hidden" name="Comment" value="<%= CStr(Request("Comment")) %>">
+		<input type="hidden" name="Address" value="<%= Request("Address") %>">
+		<input type="hidden" name="Total" value="<%= Request("Total") %>">
+		<input type="hidden" name="Delivery" value="<%= Request("Delivery") %>">
+		<input type="hidden" name="promo_disc" value="<%= Request("promo_disc") %>" />
+		<input type="submit" name="cancel" value="Cancel" onClick="cancelOrder(this.form)">
+		<input type="hidden" name="Pickup" value="<%= Request("Pickup") %>" />
+	  </form>
       <div align="center">
 	To the terms of use listed above.</div>
     </td>
@@ -380,12 +380,12 @@ function check_i_agree()
 
 
 <%
-RSCat.Close()
-Set RSCat = Nothing
+'RSCat.Close()
+'Set RSCat = Nothing
 %>
 <%
-RSClient1.Close()
-Set RSClient1 = Nothing
+'RSClient1.Close()
+'Set RSClient1 = Nothing
 %>
 
 

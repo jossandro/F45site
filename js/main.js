@@ -324,4 +324,14 @@
 	    }
 	}
 
+	$('#franchise').on('click',function(){
+		console.log($(this));
+		if(this.checked){
+			$('#fieldsetContact').attr('style','display:block;');	
+		}else{
+			$('#fieldsetContact').attr('style','display:none;');
+		}
+
+	});
+
 }());

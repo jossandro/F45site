@@ -437,7 +437,7 @@
                 <input name="Client_ID" type="hidden" value="110">
 
                     <fieldset class="form-group  col-md-12 col-sm-12 col-xs-12">
-                        <label for="Cust_Name">Customer Name</label>
+                        <label for="Cust_Name">Name</label>
                         <input type="text" class="form-control" name="Cust_Name" id="Cust_Name" value='<%=sCust_Name%>' placeholder="Customer Name" required>
                         <!-- <small class="text-muted">We'll never share your email with anyone else.</small> -->
                     </fieldset>
@@ -451,23 +451,23 @@
                         <input type="text" class="form-control" id="Fax" placeholder="Fax" name="Fax" value="<%=sFax%>">
                     </fieldset>
                     <fieldset class="form-group col-md-12 col-sm-12 col-xs-12">
-                        <label for="Store_Address">Store Address</label>
+                        <label for="Store_Address">Address</label>
                         <input type="text" class="form-control" id="Store_Address" placeholder="Store Address" name="Store_Address" value="<%=sStore_Address%>">
                     </fieldset>
                     <fieldset class="form-group col-md-6 col-sm-6 col-xs-12">
-                        <label for="Store_Suburb">Store Suburb</label>
+                        <label for="Store_Suburb">Suburb</label>
                         <input type="text" class="form-control" id="Store_Suburb" placeholder="Store Suburb" name="Store_Suburb" value="<%=sStore_Suburb%>">
                     </fieldset>
                     <fieldset class="form-group col-md-6 col-sm-6 col-xs-12">
-                        <label for="Store_State">Store State</label>
+                        <label for="Store_State">State</label>
                         <input type="text" class="form-control" id="Store_State" placeholder="Store State" name="Store_State" value="<%=sStore_State%>">
                     </fieldset>
                     <fieldset class="form-group col-md-6 col-sm-6 col-xs-12">
-                        <label for="Store_Country">Store Country</label>
+                        <label for="Store_Country">Country</label>
                         <input type="text" class="form-control" id="Store_Country" placeholder="Store Country" name="Store_Country" value="<%=sStore_Country%>">
                     </fieldset>
                     <fieldset class="form-group col-md-6 col-sm-6 col-xs-12">
-                        <label for="Store_Postcode">Store Postcode</label>
+                        <label for="Store_Postcode">Postcode</label>
                         <input type="text" class="form-control" id="Store_Postcode" placeholder="Store Postcode" name="Store_Postcode" value="<%=sStore_Postcode%>" >
                     </fieldset>
 
@@ -475,7 +475,7 @@
                         <label for="copy" class="form-check-label"> Delivery Address 
                             <p class="form-control-static" style="margin-left: 30px;">
                                 <input class="form-check-input" type="checkbox" name="copy" id="copy" value="1" onClick="delivery()">
-                                Same as store address  
+                                Same as main address  
                             </p>
                         </label> 
                     </fieldset>
@@ -499,8 +499,16 @@
                         <label for="Store_Postcode">Delivery Postcode</label>
                         <input type="text" class="form-control" id="Delivery_Postcode" placeholder="Delivery Postcode" name="Delivery_Postcode" value="<%=sDelivery_Postcode%>" >
                     </fieldset>
+                    <fieldset class="form-group col-md-12 col-sm-12 col-xs-12 form-check">
+                        <label for="franchise" class="form-check-label"> Franchise
+                            <p class="form-control-static" style="margin-left: 30px;">
+                                <input class="form-check-input" type="checkbox" name="franchise" id="franchise" value="1" >
+                                Are you a F45 franchise?
+                            </p>
+                        </label> 
+                    </fieldset>
 
-                    <fieldset class="form-group col-md-6 col-sm-6 col-xs-12">
+                    <fieldset id="fieldsetContact" class="form-group col-md-12 col-sm-12 col-xs-12" style="display:none;">
                         <label for="contact">Contact</label>
                         <input type="text" class="form-control" id="contact" placeholder="Contact Person" name="contact" value="<%=scontact%>" >
                     </fieldset>
