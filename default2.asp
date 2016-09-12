@@ -4,7 +4,6 @@
 <!--#include file="./Connections/dbConnect.asp" -->
 
 <!--#include file="menu_top_db.asp" -->
-<!--#include file="search_functions.asp" -->
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -14,22 +13,24 @@
 
 <!--#include file="header_menu.asp" -->
 
+<section class="owl-carousel owl-carousel1 owl-carousel-fullwidth fh5co-light-arrow animate-box" data-animate-effect="fadeIn">
+    <div class="item"><a href="images/under-armour.jpg" class="image-popup"><img src="images/under-armour.jpg" alt="image"></a></div>
+    <div class="item"><a href="images/nike-just-do-it.jpg" class="image-popup"><img src="images/nike-just-do-it.jpg" alt="image"></a></div>
+</section>
+
 
 <section id="fh5co-products-section" class="section">
-
     <div class="container">
         <div class="row">
-            <form method="post" >
             <div class="col-md-12 text-center">
-                <span class="icon-search"></span>
-                <input type="text" name="q" class="search-input" placeholder="Search">
-                <input type="submit" class="btn btn-filters" value="Ok">
+                <h2>Top Products</h2>
             </div>
-            </form>
+            <!-- <div class="col-md-6 col-md-offset-3 text-center">
+                <a class="btn btn-filters" href="#">Best Sellers</a>
+                <a class="btn btn-filters" href="#">New Arrivals</a>
+                <a class="btn btn-filters" href="#">Featured</a>
+            </div> -->
         </div>
-    </div>
-    <div class="container" style="padding: 0">
-        <div class="divider" style="margin: 45px 0 5rem 0"></div>
     </div>
 
     <%
@@ -42,21 +43,18 @@
     <%
     Dim RSProduct
     Dim RSProduct_numRows
+    Dim product_sql
+    If Not MM_grantAccess Then
+        product_sql = "SELECT TOP 12 ep.*, p.lgimage FROM extend_products ep INNER JOIN products p ON p.ID = ep.ID INNER JOIN category c ON ep.Cat_ID = c.Cat_ID WHERE c.client_ID = 110 ORDER BY NEWID() "
+    else
+        product_sql = "SELECT TOP 12 ep.*, p.lgimage FROM extend_products ep INNER JOIN products p ON p.ID = ep.ID INNER JOIN category c ON ep.Cat_ID = c.Cat_ID WHERE c.client_ID = "&Session("client_ID")&" ORDER BY NEWID() "
+    end if
 
     Set RSProduct = Server.CreateObject("ADODB.Recordset")
     RSProduct.ActiveConnection = MM_dbConnect_STRING
-
-    Dim query
-    Dim sqlCode
-    query = ""
-    sqlCode = "SELECT TOP 12 ep.*, p.lgimage FROM extend_products ep INNER JOIN products p ON p.ID = ep.ID INNER JOIN category c ON ep.Cat_ID = c.Cat_ID WHERE c.client_ID = 99 ORDER BY NEWID() "
-    If (Request.Form("q") <> "" and CheckStringForSQL(Request.Form("q"))) Then 
-      query = Request.Form("q")
-      sqlCode = "SELECT ep.*, p.lgimage FROM extend_products ep INNER JOIN products p ON p.ID = ep.ID INNER JOIN category c ON ep.Cat_ID = c.Cat_ID WHERE c.client_ID = 99 AND (ep.expr1 like '%"+query+"%' OR ep.Description like '%"+query+"%' OR ep.custom like '%"+query+"%' OR ep.custom_desc like '%"+query+"%' ) ORDER BY listp, Custom ASC"
-    End If
-
-    RSProduct.Source = sqlCode
-
+    'RSProduct.Source = "SELECT * FROM extend_products WHERE Cat_ID = " + Replace(RSProduct__MMColParam, "'", "''") + " ORDER BY listp, Description ASC"
+    'RSProduct.Source = "SELECT top 12 * FROM products "            ' WHERE ep.Cat_ID = 300"
+    RSProduct.Source =  product_sql  
     RSProduct.CursorType = 0
     RSProduct.CursorLocation = 2
     RSProduct.LockType = 1
@@ -95,14 +93,22 @@
                 %>
                 <div class="products col-md-3 animate-box">
                     <!-- <span class="featured sale"><small>Sale</small></span> -->
-                    <a href="order.asp?ID=<%= RSProduct.Fields.Item("ID").Value %>&dept=<%= dept %>">
+                    <%
+                    If MM_grantAccess Then              %>
+                        <a href="order.asp?ID=<%= RSProduct.Fields.Item("ID").Value %>&dept=<%= dept %>">
+                    <% else %>
+                        <a href="login.asp">
+                    <% end if   %>
                         <figure>
                             <img class="img-responsive" src="../databases/images/<%=(RSProduct.Fields.Item("lgimage").Value)%>" alt="">
                         </figure>
                         <p class="item-name"><%=prodName%></p>
                         <p class="item-category"><small><%=(ucase(left(Cat_title,1)) & lcase(mid(Cat_title,2)))%></small></p>
-                        <p class="item-price">$<%=(RSProduct.Fields.Item("PriceInc").Value)%></p>
+                        <p class="item-price"><%=FormatCurrency((RSProduct.Fields.Item("PriceInc").Value), 2, -2, -2, -2)%></p>
+                    <%
+                   If MM_grantAccess or true Then              %>
                     </a>
+                <% end If       %>
                 </div>      <%
                 RSProduct.MoveNext()
             Wend
@@ -154,8 +160,8 @@
                 <h1>Newsletter</h1>
             </div>
             <div class="col-md-4 cols-sm-12">
-                <p>If You Are Unable To Load Any Pages,</p>
-                <p>Check Your Computer.</p>
+                <!-- <p>If You Are Unable To Load Any Pages,</p>
+                <p>Check Your Computer.</p> -->
             </div>
             <div class="col-md-6 cols-sm-12">
                 <form action="">

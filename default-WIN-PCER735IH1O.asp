@@ -1,7 +1,7 @@
 <%@LANGUAGE="VBSCRIPT"%>
 <!--#include file="restrict.asp" -->
 
-<!--#include file="../Connections/dbConnect.asp" -->
+<!--#include file="./Connections/dbConnect.asp" -->
 
 <!--#include file="menu_top_db.asp" -->
 

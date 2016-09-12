@@ -1,7 +1,7 @@
 <%@LANGUAGE="VBSCRIPT"%>
 <!--#include file="restrict.asp" -->
 
-<!--#include file="../Connections/dbConnect.asp" -->
+<!--#include file="./Connections/dbConnect.asp" -->
 <%
 Dim RSProduct__MMColParam
 RSProduct__MMColParam = "1"
@@ -439,7 +439,7 @@ End Function
                                 <a href="login.asp">
                             <% end if %>
                             <figure >
-                                <img class="img-responsive" style="max-width:100%;" src="../databases/images/<%=(RSProduct.Fields.Item("lgimage").Value)%>" alt="">
+                                <img class="img-responsive" style="max-width:100%;" src="http://www.josephdahdah.com.au/databases/images/<%=(RSProduct.Fields.Item("lgimage").Value)%>" alt="">
                             </figure>
                             <p class="item-name"><%=prodName%></p>
                             <p class="item-category"><small><%=(ucase(left(Cat_title,1)) & lcase(mid(Cat_title,2)))%></small></p>

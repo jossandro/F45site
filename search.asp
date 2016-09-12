@@ -1,7 +1,7 @@
 <%@LANGUAGE="VBSCRIPT"%>
 <!--#include file="restrict.asp" -->
 
-<!--#include file="../Connections/dbConnect.asp" -->
+<!--#include file="./Connections/dbConnect.asp" -->
 
 <!--#include file="menu_top_db.asp" -->
 <!--#include file="search_functions.asp" -->
@@ -130,7 +130,7 @@ qtdResults = RSProduct.RecordCount
                         <a href="order.asp?ID=<%= RSProduct.Fields.Item("ID").Value %>&dept=<%= dept %>">
                     <% end if       %>
                         <figure>
-                            <img class="img-responsive" src="../databases/images/<%=(RSProduct.Fields.Item("lgimage").Value)%>" alt="">
+                            <img class="img-responsive" src="http://www.josephdahdah.com.au/databases/images/<%=(RSProduct.Fields.Item("lgimage").Value)%>" alt="">
                         </figure>
                         <p class="item-name"><%=prodName%></p>
                         <p class="item-category"><small><%=(ucase(left(Cat_title,1)) & lcase(mid(Cat_title,2)))%></small></p>

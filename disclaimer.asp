@@ -2,7 +2,7 @@
 <% 'Option Explicit %>
 <!--#include file="restrict.asp" -->
 <!--#include file="process_order_functions.asp" -->
-<!--#include file="../Connections/dbConnect.asp" -->
+<!--#include file="./Connections/dbConnect.asp" -->
 
 <% 
 Dim online
@@ -54,8 +54,9 @@ Session("grandtotal") = cStr(Request("totalamount"))
 response.expires = -1
 ' *** Edit Operations: declare variables
 
-MM_editAction = CStr(Request("URL"))
-MM_editAction = MM_editAction + "?UC_SaveCartToTable=1"
+'MM_editAction = CStr(Request("URL"))
+'MM_editAction = MM_editAction + "?UC_SaveCartToTable=1"
+MM_editAction = "disclaimer.asp?UC_SaveCartToTable=1"
 
 ' boolean to abort record edit
 MM_abortEdit = false

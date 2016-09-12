@@ -26,7 +26,7 @@ If MM_valUsername <> "" Then
   MM_rsUser.LockType = 3
   MM_rsUser.Open
   
-
+  
   If Not MM_rsUser.EOF Or Not MM_rsUser.BOF Then 
 
     str_client_ID = MM_rsUser.Fields.Item("Client_ID").Value
@@ -38,6 +38,7 @@ If MM_valUsername <> "" Then
     str_enable = MM_rsUser.Fields.Item("enable").Value
     str_International = MM_rsUser.Fields.Item("International").Value
    
+
      ' username and password match - this is a valid user
 	'check that the customer is enabled
 	

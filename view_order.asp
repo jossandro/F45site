@@ -1,7 +1,7 @@
 <%@LANGUAGE="VBSCRIPT"%>
 <!--#include file="restrict.asp" -->
 <!--#include file="process_order_functions.asp" -->
-<!--#include file="../Connections/dbConnect.asp" -->
+<!--#include file="./Connections/dbConnect.asp" -->
 <%
   Response.Buffer = True
   Response.ExpiresAbsolute = Now() - 1
@@ -162,7 +162,7 @@ str_Promo_Disc = RSClient1.Fields.Item("Promo_Disc").Value
                         <div class="col-md-1 col-sm-2 col-xs-12 order-img"> <% ' image
                           If (last_image <> newarray(7,j)) Then 
                               last_image = newarray(7,j) %>
-                              <img class="img-responsive center-block" src="../databases/images/<%= newarray(7,j) %>">    <% 
+                              <img class="img-responsive center-block" src="http://www.josephdahdah.com.au/databases/images/<%= newarray(7,j) %>">    <% 
                           End If  %>
                             
                         </div>
@@ -201,7 +201,7 @@ str_Promo_Disc = RSClient1.Fields.Item("Promo_Disc").Value
                         </div>
                         <div class="col-md-1 col-sm-2 col-xs-2 order-item">
                             <a href="view_order.asp?code=<%= newarray(10,j) %><%= newarray(3,j) %><%= newarray(6,j) %><%= newarray(8,j) %>">
-                                <img src="images/delete.svg" class="img-item-icon" alt="Delete Item" />
+                                <img src="images/delete.png" class="img-item-icon" alt="Delete Item" />
                             </a>
                         </div>
                     </div>        

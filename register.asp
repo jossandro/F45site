@@ -1,5 +1,5 @@
 <%@LANGUAGE="VBSCRIPT"%>
-<!--#include file="../Connections/dbConnect.asp" -->
+<!--#include file="./Connections/dbConnect.asp" -->
 
 <% 
   Dim HTML
@@ -431,8 +431,8 @@
     <div class="container">
         <h3>New Customer Registration</h3>
         
-
-                <form action="<%=MM_editAction%>" method="POST" name="form1" onSubmit="MM_validateForm('Cust_Name','','R','Account','','R','Phone','','R','Store_Address','','R','Store_Suburb','','R','Store_State','','R','Store_Postcode','','R','Delivery_Address','','R','Delivery_Suburb','','R','Delivery_State','','R','Delivery_Postcode','','R','contact','','R','email','','RisEmail','userid','','R','passwd','','R','passwd1','','R');return document.MM_returnValue" >
+                <!-- <%=MM_editAction%>   -->
+                <form action="register.asp" method="POST" name="form1" onSubmit="MM_validateForm('Cust_Name','','R','Account','','R','Phone','','R','Store_Address','','R','Store_Suburb','','R','Store_State','','R','Store_Postcode','','R','Delivery_Address','','R','Delivery_Suburb','','R','Delivery_State','','R','Delivery_Postcode','','R','contact','','R','email','','RisEmail','userid','','R','passwd','','R','passwd1','','R');return document.MM_returnValue" >
 
                 <input name="Client_ID" type="hidden" value="110">
 

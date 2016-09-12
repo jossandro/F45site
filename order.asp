@@ -1,9 +1,10 @@
 <%@LANGUAGE="VBSCRIPT"%>
 <!--#include file="restrict.asp" -->
 
-<!--#include file="../Connections/dbConnect.asp" -->
+<!--#include file="./Connections/dbConnect.asp" -->
 <%
-UC_editAction = CStr(Request("URL"))
+'UC_editAction = CStr(Request("URL"))
+UC_editAction = "order.asp"
 If (Request.QueryString <> "") Then
   UC_editAction = UC_editAction & "?" & Request.QueryString
 End If
@@ -133,7 +134,7 @@ End If
                 <div class="row">
                     <div class="product col-md-9 col-sm-9 col-xs-12 animate-box">
                         <figure>
-                            <img class="img-responsive center-block" src='../databases/images/<%=(RSProduct.Fields.Item("lgimage").Value)%>' alt='<%=(RSProduct.Fields.Item("Description").Value)%>'>
+                            <img class="img-responsive center-block" src='images/products/<%=(RSProduct.Fields.Item("lgimage").Value)%>' alt='<%=(RSProduct.Fields.Item("Description").Value)%>'>
                         </figure>
                     </div>
                 </div>
@@ -239,12 +240,11 @@ End If
             </div>
 
         </div>
-        <div class="row">
-            <div class="com-md-12">
-                 <% 
+        <div class="row" style="margin-top: 50px;">
+            <div class="com-md-12">         <% 
                     strCol  = RSClient1.Fields.Item("download_chart").Value  
                     if (strCol <> "") Then %>
-                      <p class="item-size-chart"><small>Size Chart  <a href="../databases/downloads/<%= strCol %>" target="chart">click here</a></small></p>
+                      <p class="item-size-chart " ><small>Size Chart  <a href="../databases/downloads/<%= strCol %>" target="chart">click here</a></small></p>
                     <% End If %>
             </div>
         </div>

@@ -1,7 +1,7 @@
 <%@LANGUAGE="VBSCRIPT"%>
 <!--#include file="restrict.asp" -->
 
-<!--#include file="../Connections/dbConnect.asp" -->
+<!--#include file="./Connections/dbConnect.asp" -->
 
 <!--#include file="menu_top_db.asp" -->
 
@@ -14,8 +14,11 @@
 <!--#include file="header_menu.asp" -->
 
 <section class="owl-carousel owl-carousel1 owl-carousel-fullwidth fh5co-light-arrow animate-box" data-animate-effect="fadeIn">
-    <div class="item"><a href="images/under-armour.jpg" class="image-popup"><img src="images/under-armour.jpg" alt="image"></a></div>
-    <div class="item"><a href="images/nike-just-do-it.jpg" class="image-popup"><img src="images/nike-just-do-it.jpg" alt="image"></a></div>
+    <!-- <div class="item"><a href="images/under-armour.jpg" class="image-popup"><img src="images/under-armour.jpg" alt="image"></a></div>
+    <div class="item"><a href="images/nike-just-do-it.jpg" class="image-popup"><img src="images/nike-just-do-it.jpg" alt="image"></a></div> -->
+    <div class="item"><a href="images/gymone.png" class="image-popup"><img src="images/gymone.png" alt="image"></a></div>
+    <div class="item"><a href="images/guys2.png" class="image-popup"><img src="images/guys2.png" alt="image"></a></div>
+    <div class="item"><a href="images/pic3.png" class="image-popup"><img src="images/pic3.png" alt="image"></a></div>
 </section>
 
 
@@ -45,7 +48,7 @@
     Dim RSProduct_numRows
     Dim product_sql
     If Not MM_grantAccess Then
-        product_sql = "SELECT TOP 12 ep.*, p.lgimage FROM extend_products ep INNER JOIN products p ON p.ID = ep.ID INNER JOIN category c ON ep.Cat_ID = c.Cat_ID WHERE c.client_ID = 110 ORDER BY NEWID() "
+        product_sql = "SELECT TOP 12 ep.*, p.lgimage FROM extend_products ep INNER JOIN products p ON p.ID = ep.ID INNER JOIN category c ON ep.Cat_ID = c.Cat_ID WHERE c.client_ID = 111 ORDER BY NEWID() "
     else
         product_sql = "SELECT TOP 12 ep.*, p.lgimage FROM extend_products ep INNER JOIN products p ON p.ID = ep.ID INNER JOIN category c ON ep.Cat_ID = c.Cat_ID WHERE c.client_ID = "&Session("client_ID")&" ORDER BY NEWID() "
     end if
@@ -100,7 +103,7 @@
                         <a href="login.asp">
                     <% end if   %>
                         <figure>
-                            <img class="img-responsive" src="../databases/images/<%=(RSProduct.Fields.Item("lgimage").Value)%>" alt="">
+                            <img class="img-responsive" src="http://www.josephdahdah.com.au/databases/images/<%=(RSProduct.Fields.Item("lgimage").Value)%>" alt="">
                         </figure>
                         <p class="item-name"><%=prodName%></p>
                         <p class="item-category"><small><%=(ucase(left(Cat_title,1)) & lcase(mid(Cat_title,2)))%></small></p>

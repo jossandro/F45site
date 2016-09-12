@@ -1,5 +1,5 @@
 <%@LANGUAGE="VBSCRIPT"%>
-<!--#include file="../Connections/dbConnect.asp" -->
+<!--#include file="./Connections/dbConnect.asp" -->
 
 <%
 Session("auth") = Session("orderid")

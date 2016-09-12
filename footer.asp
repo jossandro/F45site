@@ -92,19 +92,26 @@
                 </div>
                 <div class="col-md-3 col-sm-6 cols-xs-12">
                     <div class="row">
+                        <%
+                        if MM_grantAccess then
+                        %>
                         <div class="col-md-12 cols-sm-12">
-                            <h4>Our Services</h4>
+                            <h4>Instructions</h4>
                         </div>
                         <div class="col-md-12 cols-sm-12">
                             <div class="line"></div>
                             <ul class="pages-footer">
-                                <li><a href="#">E-Commerce Stores</a></li>
-                                <li><a href="#">Responsive Design</a></li>
-                                <li><a href="#">Grid Layout</a></li>
-                                <li><a href="#">Templates Services</a></li>
-                                <li><a href="#">Website Development</a></li>
+                                <li><a href="ordering_instructions.asp">Ordering Instructions</a></li>
+                                <li><a href="getOrderHistory.asp">Order History</a></li>
+                                <li><a href="returns_exchanges.asp">Returns and Exchanges</a></li>
+                                <li><a href="#">Freight</a></li>
+                                <li><a href="garmet_care.asp">Garment Care</a></li>
+                                <li><a href="recommended_retail_price.asp">Recommended Retail Price</a></li>
                             </ul>
                         </div>
+                        <%
+                        end if
+                        %>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6 cols-xs-12">
