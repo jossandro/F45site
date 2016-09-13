@@ -132,7 +132,7 @@ End If
         <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="row">
-                    <div class="product col-md-9 col-sm-9 col-xs-12 animate-box">
+                    <div class="product col-md-9 col-sm-9 col-xs-12 ">      <!-- animate-box -->
                         <figure>
                             <img class="img-responsive center-block" src='images/products/<%=(RSProduct.Fields.Item("lgimage").Value)%>' alt='<%=(RSProduct.Fields.Item("Description").Value)%>'>
                         </figure>

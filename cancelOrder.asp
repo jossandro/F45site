@@ -234,16 +234,3 @@ function doNewOrder() {
 
 </body>
 </html>
-
-<%
-RSCustomer.Close()
-Set RSCustomer = Nothing
-%>
-<%
-RSGet_client.Close()
-Set RSCustomer = Nothing
-%>
-<%
-RSEmail.Close()
-Set RSCustomer = Nothing
-%>

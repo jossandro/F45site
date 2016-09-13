@@ -94,7 +94,7 @@
                 prodName = trim(str1)
 
                 %>
-                <div class="products col-md-3 animate-box">
+                <div class="products col-md-3 ">        <!--   animate-box -->
                     <!-- <span class="featured sale"><small>Sale</small></span> -->
                     <%
                     If MM_grantAccess Then              %>

@@ -25,7 +25,7 @@ Dim query
 Dim sqlCode
 Dim clientID
 If Not MM_grantAccess Then
-    clientID = 110
+    clientID = 111
 else
     clientID = 99
 end if
@@ -123,7 +123,7 @@ qtdResults = RSProduct.RecordCount
                 prodName = trim(str1)
 
                 %>
-                <div class="products col-md-3 animate-box">
+                <div class="products col-md-3 ">    <!-- animate-box -->
                     <!-- <span class="featured sale"><small>Sale</small></span> -->
                     <%
                     If MM_grantAccess Then              %>

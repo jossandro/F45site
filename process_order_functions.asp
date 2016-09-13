@@ -47,6 +47,155 @@ End function
 
 
 Function send_email()
+	Delivery = 0
+	Set jmail = Server.CreateObject("JMail.Message")
+	
+	Dim RSCustomerEmail
+	Set RSCustomerEmail = Server.CreateObject("ADODB.Recordset")
+	RSCustomerEmail.ActiveConnection = MM_dbConnect_STRING
+'	RSCustomerEmail.Source = "SELECT * FROM Client_Account  WHERE client_ID = 95 AND Account = '1520' "
+
+	RSCustomerEmail.Source = "SELECT * FROM Client_Account  WHERE client_ID = " + Cstr(RSClient.Fields.Item("Client_Id").Value) + " AND Account = '" + RsCust.Fields.Item("Account").Value + "'"
+	RSCustomerEmail.CursorType = 0
+	RSCustomerEmail.CursorLocation = 2
+	RSCustomerEmail.LockType = 1
+	RSCustomerEmail.Open()
+	
+	
+	jmail.Logging = true
+	jmail.silent = true
+
+
+	jmail.HTMLBody = "<html>"
+	jmail.appendHTML "<head>"
+	jmail.appendHTML "<title>Order </title>"
+	jmail.appendHTML "</head>"
+	jmail.appendHTML "<body >"
+	jmail.appendHTML "<table cellpadding=""4"" border=1>"
+	jmail.appendHTML "<tr><td> Date: "
+	jmail.appendHTML now() & "</td></tr>"
+	jmail.appendHTML "<tr><td>"
+	jmail.appendHTML "Order Status - " & CStr(Request("ordstatus"))
+	jmail.appendHTML "</td></tr>"
+
+	jmail.appendHTML "<tr><td>"
+	jmail.appendHTML "Order Client - " & (RSClient.Fields.Item("client").Value) & ", Customer - " & (RsCust.Fields.Item("Cust_Name").Value)
+	jmail.appendHTML "</td></tr>"
+	jmail.appendHTML "<tr><td>Cost Centre/Purchase Order: " & Request.Form("purchase_order") & "</td></tr>"
+	jmail.appendHTML "<tr><td>Site or Building: " & Request.Form("building") & "</td></tr>"
+	jmail.appendHTML "<tr><td>Employee Name: " & Request.Form("employee") & "</td></tr>"
+	jmail.appendHTML "<tr><td>Instructions:<br>" & Request.Form("Comment") & "</td></tr>"
+    jmail.appendHTML "<tr><td align=right><table width=100% cellpadding=""2"" border=1>"
+	jmail.appendHTML "<tr><td align=center>Name</td><td>Code</td><td>Customisation</td><td>Colour</td><td>Size</td><td>Print</td><td>Qty</td><td>Price</td><td>Total</td></tr>"
+
+	total_items = 0
+	newarray = arraySort( buildarray(), 9, false )
+	For j = 0 to UBound(newarray,2) - 1
+
+		jmail.appendHTML "<TR><TD align=right>" & newarray(4,j) & "</td>"
+    	jmail.appendHTML "<td  >" & newarray(2,j) & "</td>"
+    	jmail.appendHTML "<td  >" & newarray(5,j) & "</td>"
+    	jmail.appendHTML "<td  >" & newarray(6,j) & "</td>"
+    	jmail.appendHTML "<td  >" & newarray(3,j) & "</td>"
+    	if newarray(8,j)<>"" then
+			jmail.appendHTML "<td  >Name: " & newarray(8,j) & "</td>"
+		else
+			jmail.appendHTML "<td  >&nbsp;</td>"
+		end if
+		price = newarray(1,j)
+		qty = newarray(0,j)
+		total_items = total_items + (price*qty)
+    	jmail.appendHTML "<td  >" & newarray(0,j) & "</td>"
+    	jmail.appendHTML "<td  >" & FormatCurrency(newarray(1,j), 2, -2, -2, -2) & "</td>"
+    	jmail.appendHTML "<td >" & FormatCurrency(newarray(1,j)*newarray(0,j), 2, -2, -2, -2) & "</td></tr>"
+	Next 
+  
+  	jmail.appendHTML "</table>"
+	jmail.appendHTML "</td></tr>"
+	If (Request("promo_disc") <> "") Then
+		html = html &  "<input type='text' name='Discount_amount' value='" & Request("promo_disc") & "' />"
+		PromotionDiscount = CInt(Request("promo_disc"))
+		PromotionDiscount = total_items * (PromotionDiscount/100)
+		total_items = total_items - PromotionDiscount
+		jmail.appendHTML "<tr><td valign=right >" & "Promotion Discount : " & FormatCurrency((PromotionDiscount), 2, -2, -2, -2) & "</td></tr>"
+	End If
+
+	
+	Delivery = get_delivery(total_items,Session("postcode"))
+	
+	if Delivery > 0 Then
+			jmail.appendHTML "<TR><td valign=right > " & "Delivery: " & FormatCurrency((Delivery), 2, -2, -2, -2) & "</td></tr>"
+	End if
+	jmail.appendHTML "<TR><td valign=right > " & "Total: " & FormatCurrency(total_items + Delivery, 2, -2, -2, -2) & "</td></tr>"
+	jmail.appendHTML "<tr><td>"
+	jmail.appendHTML "<table border=""0"" cellpadding=""2"" cellspacing=""0"">"
+	  
+	jmail.appendHTML "<tr><td align=right>Client_ID</td><td align=left>" & (RsCust.Fields.Item("Client_ID").Value) & "</td></tr>"
+	jmail.appendHTML "<tr><td align=right>Cust_Name</td><td align=left>" & (RsCust.Fields.Item("Cust_Name").Value) & "</td></tr>"
+	jmail.appendHTML "<tr><td align=right>Account</td><td align=left>" & (RsCust.Fields.Item("Account").Value) & "</td></tr>"
+	jmail.appendHTML "<tr><td align=right>Phone</td><td align=left>" & (RsCust.Fields.Item("Phone").Value) & "</td></tr>"
+	jmail.appendHTML "<tr><td align=right>Fax</td><td align=left>" & (RsCust.Fields.Item("Fax").Value) & "</td></tr>"
+	jmail.appendHTML "<tr><td align=right>Store Address</td><td align=left>" & (RsCust.Fields.Item("Store_Address").Value) & "</td></tr>"
+	jmail.appendHTML "<tr><td align=right>Store Suburb</td><td align=left>" & (RsCust.Fields.Item("Store_Suburb").Value) & "</td></tr>"
+	jmail.appendHTML "<tr><td align=right>Store State</td><td align=left>" & (RsCust.Fields.Item("Store_State").Value) & "</td></tr>"
+	jmail.appendHTML "<tr><td align=right>Store Country</td><td align=left>" & (RsCust.Fields.Item("Store_Country").Value) & "</td></tr>"
+	jmail.appendHTML "<tr><td align=right>Store Postcode</td><td align=left>" & (RsCust.Fields.Item("Store_Postcode").Value) & "</td></tr>"
+	If Session("postcode") = "9999" Then
+		jmail.appendHTML "<tr><td align=right>NEXT DAY PICK UP </td><td align=left>please pickup from 260-266 Cleveland Street Surry Hills (enter via Little Buckingham Street Loading Dock) Mon to Friday 8.30am to 5:00 pm.</td></tr>"
+	End If
+	
+	
+		jmail.appendHTML "<tr><td align=right>Delivery Contact</td><td align=left>" & (RSAddress.Fields.Item("Delivery_Contact").Value) & "</td></tr>"
+		jmail.appendHTML "<tr><td align=right>Delivery Address</td><td align=left>" & (RSAddress.Fields.Item("Delivery_Address").Value) & "</td></tr>"
+		jmail.appendHTML "<tr><td align=right>Delivery Suburb</td><td align=left>" & (RSAddress.Fields.Item("Delivery_Suburb").Value) & "</td></tr>"
+		jmail.appendHTML "<tr><td align=right>Delivery State</td><td align=left>" & (RSAddress.Fields.Item("Delivery_State").Value) & "</td></tr>"
+		jmail.appendHTML "<tr><td align=right>Delivery Country</td><td align=left>" & (RSAddress.Fields.Item("Delivery_Country").Value) & "</td></tr>"
+		jmail.appendHTML "<tr><td align=right>Delivery Postcode</td><td align=left>" & (RSAddress.Fields.Item("Delivery_Postcode").Value) & "</td></tr>"
+	
+	jmail.appendHTML "<tr><td align=right>contact</td><td align=left>" & (RsCust.Fields.Item("contact").Value) & "</td></tr>"
+	jmail.appendHTML "<tr><td align=right>email</td><td align=left>" & (RsCust.Fields.Item("email").Value) & "</td></tr>"
+                                 
+
+	jmail.appendHTML "</table>"
+	jmail.appendHTML "</td></tr>"
+	jmail.appendHTML "</table></BODY>"
+	jmail.appendHTML "</HTML>"
+'	jmail.AddRecipient "mark@splatgraphics.com.au"
+
+  If NOT RSCustomerEmail.EOF  Then  ' code to handle mulitple emails.
+  		My_Array=split(RSCustomerEmail.Fields.Item("Email").Value,",")
+		For Each item In My_Array
+			jmail.AddRecipient (item)
+		Next       
+        
+  Else  ' code to handle mulitple emails.
+  		My_Array=split(RSClient.Fields.Item("email").Value,",")
+		For Each item In My_Array
+			jmail.AddRecipient (item)
+		Next       
+  End If 
+	RSCustomerEmail.Close()
+	Set RSCustomerEmail = Nothing
+
+	if RSClient.Fields.Item("confirmation").Value then
+	 	My_Array=split(RsCust.Fields.Item("email").Value,",")
+		For Each item In My_Array
+			jmail.AddRecipient (item)
+		Next       
+	end if
+	jmail.From = (RSEmail.Fields.Item("email_order").Value)
+	jmail.Subject = "Order - " & Request.Form("refnumber") & ", User ID - " &  Request.Form("user")
+
+                     jmail.MailServerUserName = "JDWeb"
+                     jmail.MailServerPassword = "Garment1"
+ 
+	if  jmail.Send("mail.josephdahdah.com.au" ) then ' send email
+ 		message = "Order generated and sent succesfully!"
+	elseif jmail.Send("mail.josephdahdah.com.au" ) then ' try again
+ 		message = "Order generated and sent second attempt!"
+	else
+ 		message=  "<pre>" & jmail.log & "</pre>"
+	end if
 	
 	
 	'  Response.Redirect(UC_redirectPage)

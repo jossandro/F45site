@@ -59,10 +59,7 @@
                 </div>
             </div>
             <div class="col-md-9">
-                <div class="row">
-                    <div class="products col-md-3 col-sm-3 col-xs-12 animate-box">
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -123,15 +120,15 @@ Function send_contact_email()
 
 
     myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/sendusing") = 2
-    myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/smtpserver") = "smtp.gmail.com"
-    'myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/smtpserver") = "mail.josephdahdah.com.au"
+    'myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/smtpserver") = "smtp.gmail.com"
+    myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/smtpserver") = "mail.josephdahdah.com.au"
     myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate") = 1
     myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/smtpserverport") = 465 
     myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/smtpusessl") = true
-    myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/sendusername") = "joe@returnonclick.com.au"
-    'myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/sendusername") = "JDWeb"
-    myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/sendpassword") = "cavocanavala"
-    'myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/sendpassword") = "Garment1"
+    'myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/sendusername") = "joe@returnonclick.com.au"
+    myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/sendusername") = "JDWeb"
+    'myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/sendpassword") = "passwd"
+    myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/sendpassword") = "Garment1"
     myMail.Configuration.Fields.Item("http://schemas.microsoft.com/cdo/configuration/smtpconnectiontimeout") = 60 
     myMail.Configuration.Fields.Update 
 
@@ -234,7 +231,7 @@ Function send_contact_email_jmail()
     
     
     jmail.From = "joe@returnonclick.com.au"
-    jmail.Subject = "Testing email  "
+    jmail.Subject = "Contact from F45 website "
 
     jmail.MailServerUserName = "JDWeb"
     jmail.MailServerPassword = "Garment1"

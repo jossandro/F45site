@@ -432,9 +432,9 @@
         <h3>New Customer Registration</h3>
         
                 <!-- <%=MM_editAction%>   -->
-                <form action="register.asp" method="POST" name="form1" onSubmit="MM_validateForm('Cust_Name','','R','Account','','R','Phone','','R','Store_Address','','R','Store_Suburb','','R','Store_State','','R','Store_Postcode','','R','Delivery_Address','','R','Delivery_Suburb','','R','Delivery_State','','R','Delivery_Postcode','','R','contact','','R','email','','RisEmail','userid','','R','passwd','','R','passwd1','','R');return document.MM_returnValue" >
+                <form action="register.asp" method="POST" name="form1" onSubmit="MM_validateForm('Cust_Name','','R','Account','','R','Phone','','R','Store_Address','','R','Store_Suburb','','R','Store_State','','R','Store_Postcode','','R','Delivery_Address','','R','Delivery_Suburb','','R','Delivery_State','','R','Delivery_Postcode','','R','email','','RisEmail','userid','','R','passwd','','R','passwd1','','R');return document.MM_returnValue" >
 
-                <input name="Client_ID" type="hidden" value="110">
+                <input name="Client_ID" type="hidden" value="111">
 
                     <fieldset class="form-group  col-md-12 col-sm-12 col-xs-12">
                         <label for="Cust_Name">Name</label>
@@ -737,15 +737,3 @@
 </body>
 </html>
 
-<%
-RSCustomer.Close()
-Set RSCustomer = Nothing
-%>
-<%
-RSGet_client.Close()
-Set RSCustomer = Nothing
-%>
-<%
-RSEmail.Close()
-Set RSCustomer = Nothing
-%>
