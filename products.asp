@@ -414,8 +414,8 @@ End Function
                         If RSProduct.Fields.Item("Custom_desc").Value <> "" Then 
                             prodName = prodName & trim(RSProduct.Fields.Item("Custom_desc").Value)
                         End If
-                        if len(prodName) > 16 Then
-                            prodName = left(prodName, 14) & "..."
+                        if len(prodName) > 22 Then
+                            prodName = left(prodName, 20) & "..."
                         end if
 
                         str = prodName
@@ -441,8 +441,15 @@ End Function
                             <figure >
                                 <img class="img-responsive" style="max-width:100%;" src="http://www.josephdahdah.com.au/databases/images/<%=(RSProduct.Fields.Item("lgimage").Value)%>" alt="">
                             </figure>
-                            <p class="item-name"><%=prodName%></p>
-                            <p class="item-category"><small><%=(ucase(left(Cat_title,1)) & lcase(mid(Cat_title,2)))%></small></p>
+                            <%
+                            dim prodFirstName
+                            prodFirstName = (ucase(left(Cat_title,1)) & lcase(mid(Cat_title,2)))
+                            if len(prodFirstName) > 16 Then
+                                prodFirstName = left(prodFirstName, 14) & "..."
+                            end if
+                            %>
+                            <p class="item-name"><%=prodFirstName %></p>
+                            <p class="item-category"><small><%=prodName%></small></p>
                             <p class="item-price"><%= FormatCurrency((RSProduct.Fields.Item("PriceInc").Value), 2, -2, -2, -2) %> <span class="icon-star-half-empty pull-right"></span></p>
                             <%
                             If MM_grantAccess or true Then              %>

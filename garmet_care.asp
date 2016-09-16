@@ -2,6 +2,28 @@
 <!--#include file="restrict.asp" -->
 <!--#include file="./Connections/dbConnect.asp" -->
  
+ <%
+Dim RSClient__MMColParam
+RSClient__MMColParam = "111"
+If (Session("client_ID") <> "") Then 
+  RSClient__MMColParam = Session("client_ID")
+End If
+%>
+<%
+Dim RSClient
+Dim RSClient_numRows
+
+Set RSClient = Server.CreateObject("ADODB.Recordset")
+RSClient.ActiveConnection = MM_dbConnect_STRING
+RSClient.Source = "SELECT garmen FROM client WHERE client_ID = " + Replace(RSClient__MMColParam, "'", "''") + ""
+RSClient.CursorType = 0
+RSClient.CursorLocation = 2
+RSClient.LockType = 1
+RSClient.Open()
+
+RSClient_numRows = 0
+%>
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -15,10 +37,21 @@
     <div class="container">
         <div class="col-md-12 ">
             <h2>Specific Garmet Care</h2>
-            <p>F45 Sweats are Easy Care- Not Care Free </p>
-            <p>Please follow the care labels on the garments to achieve the optimum results.</p>
-            <p>*Remember to wash light and dark colours separately and do not use bleach.</p>
-            <p>Any questions: email only: info@robbiebarsman.com.au</p>
+            <p><% 
+			Dim product_text
+			DIM i 
+			Dim p_description
+
+			product_text = (RSClient.Fields.Item("garmen").Value)
+			if product_text <> ""  then 
+				p_description = Split(product_text,vbCr,-1,0)
+				i= 0
+				Do While i<=UBound(p_description)
+					response.Write(p_description(i) + "<br>")
+					i=i+1
+				Loop
+			End if
+			%></p>
         </div>
     </div>
 </section>

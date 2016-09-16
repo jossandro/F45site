@@ -502,8 +502,8 @@
                     <fieldset class="form-group col-md-12 col-sm-12 col-xs-12 form-check">
                         <label for="franchise" class="form-check-label"> Franchise
                             <p class="form-control-static" style="margin-left: 30px;">
-                                <input class="form-check-input" type="checkbox" name="franchise" id="franchise" value="1" >
-                                Are you a F45 franchise?
+                                <input class="form-check-input" type="checkbox" name="franchisee" id="franchisee" value="1" >
+                                Are you a F45 franchisee?
                             </p>
                         </label> 
                     </fieldset>

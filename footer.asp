@@ -56,7 +56,7 @@
         <div class="divider"></div>
         <div class="row">
             <div class="container">
-                <div class="col-md-3 col-sm-6 cols-xs-12">
+                <!-- <div class="col-md-3 col-sm-6 cols-xs-12">
                     <div class="row">
                         <div class="col-md-12 cols-sm-12">
                             <h4>Policies & Info</h4>
@@ -89,31 +89,30 @@
                             </ul>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3 col-sm-6 cols-xs-12">
+                </div> -->
+                <div class="col-md-6 col-sm-6 cols-xs-12">
                     <div class="row">
-                        <%
-                        if MM_grantAccess then
-                        %>
                         <div class="col-md-12 cols-sm-12">
-                            <h4>Instructions</h4>
+                            <h4>Policies & Info</h4>
                         </div>
                         <div class="col-md-12 cols-sm-12">
                             <div class="line"></div>
                             <ul class="pages-footer">
+                                <li><a href="#">Term & Conditions</a></li>
+                                <li><a href="#">Shipping & Refund</a></li>
                                 <li><a href="ordering_instructions.asp">Ordering Instructions</a></li>
-                                <li><a href="getOrderHistory.asp">Order History</a></li>
                                 <li><a href="returns_exchanges.asp">Returns and Exchanges</a></li>
-                                <li><a href="#">Freight</a></li>
+                                <li><a href="freight.asp">Freight</a></li>
                                 <li><a href="garmet_care.asp">Garment Care</a></li>
-                                <li><a href="recommended_retail_price.asp">Recommended Retail Price</a></li>
+                                <li><a href="recommended_retail_price.asp">Recommended Retail Price</a></li><%
+                                if MM_grantAccess then                            %>
+                                    <li><a href="getOrderHistory.asp">Order History</a></li><%
+                                end if                      %>
                             </ul>
                         </div>
-                        <%
-                        end if
-                        %>
                     </div>
                 </div>
+                <div class="col-md-3 col-sm-6 cols-xs-12"></div>
                 <div class="col-md-3 col-sm-6 cols-xs-12">
                     <div class="row contact">
                         <div class="col-md-12 cols-sm-12">
@@ -140,10 +139,10 @@
             <div class="container">
                 <div class="col-md-4 cols-sm-12">
                     <ul class="fh5co-social-icons">
-                        <li><a href="#"><span class="icon-facebook"></span></a></li>
-                        <li><a href="#"><span class="icon-twitter"></span></a></li>
-                        <li><a href="#"><span class="icon-instagram"></span></a></li>
-                        <li><a href="#"><span class="icon-pinterest"></span></a></li>
+                        <li><a href="https://www.facebook.com/F45FunctionalTraining"><span class="icon-facebook"></span></a></li>
+                        <li><a href="https://twitter.com/F45TRAINING"><span class="icon-twitter"></span></a></li>
+                        <li><a href="https://instagram.com/f45_training/"><span class="icon-instagram"></span></a></li>
+                        <li><a href="https://www.youtube.com/user/F45Training"><span class="icon-youtube"></span></a></li>
                     </ul>
                 </div>
                 <div class="col-md-4 cols-sm-12 text-center">

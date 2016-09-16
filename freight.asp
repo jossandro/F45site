@@ -15,7 +15,7 @@ Dim RSClient_numRows
 
 Set RSClient = Server.CreateObject("ADODB.Recordset")
 RSClient.ActiveConnection = MM_dbConnect_STRING
-RSClient.Source = "SELECT returns_exchange FROM client WHERE client_ID = " + Replace(RSClient__MMColParam, "'", "''") + ""
+RSClient.Source = "SELECT freight FROM client WHERE client_ID = " + Replace(RSClient__MMColParam, "'", "''") + ""
 RSClient.CursorType = 0
 RSClient.CursorLocation = 2
 RSClient.LockType = 1
@@ -35,7 +35,7 @@ RSClient_numRows = 0
 <section id="fh5co-product-section" class="section">
     <div class="container">
         <div class="col-md-12 ">
-            <h2>Returns and Exchanges</h2>
+            <h2>Freight</h2>
 
             <p>
                 <% 
@@ -43,7 +43,7 @@ RSClient_numRows = 0
                 DIM i 
                 Dim p_description
 
-                page_text = (RSClient.Fields.Item("returns_exchange").Value)
+                page_text = (RSClient.Fields.Item("freight").Value)
                 if page_text <> ""  then 
                     p_description = Split(page_text,vbCr,-1,0)
                     i= 0
