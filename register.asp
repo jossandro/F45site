@@ -36,6 +36,7 @@
   sDelivery_State =  ""
   sDelivery_Country =  ""
   sDelivery_Postcode =  ""
+  sFranchisee =  ""
   scontact =  ""
   semail =  ""
   suserid =  ""
@@ -60,6 +61,7 @@
        sDelivery_State =  Request.Form("Delivery_State")
        sDelivery_Country =  Request.Form("Delivery_Country")
        sDelivery_Postcode =  Request.Form("Delivery_Postcode")
+       sFranchisee = Request.Form("franchisee")
        scontact =  Request.Form("contact")
        semail =  Request.Form("email")
        suserid =  Request.Form("userid")
@@ -196,7 +198,7 @@
       MM_editTable = "Customers"
       MM_editRedirectUrl = "register1.asp"
       MM_fieldsStr  = "Client_ID|value|Cust_Name|value|Account|value|Phone|value|Fax|value|Store_Address|value|Store_Suburb|value|Store_State|value|Store_Country|value|Store_Postcode|value|Delivery_Address|value|Delivery_Suburb|value|Delivery_State|value|Delivery_Country|value|Delivery_Postcode|value|contact|value|email|value|userid|value|passwd|value|payment|value|enable|value|online|value"
-      MM_columnsStr = "Client_ID|none,none,NULL|Cust_Name|',none,''|Account|',none,''|Phone|',none,''|Fax|',none,''|Store_Address|',none,''|Store_Suburb|',none,''|Store_State|',none,''|Store_Country|',none,''|Store_Postcode|',none,''|Delivery_Address|',none,''|Delivery_Suburb|',none,''|Delivery_State|',none,''|Delivery_Country|',none,''|Delivery_Postcode|',none,''|contact|',none,''|email|',none,''|userid|',none,''|passwd|',none,''|payment|none,none,1|enable|none,none,1|online|none,none,1"
+      MM_columnsStr = "Client_ID|none,none,NULL|Cust_Name|',none,''|Account|',none,''|Phone|',none,''|Fax|',none,''|Store_Address|',none,''|Store_Suburb|',none,''|Store_State|',none,''|Store_Country|',none,''|Store_Postcode|',none,''|Delivery_Address|',none,''|Delivery_Suburb|',none,''|Delivery_State|',none,''|Delivery_Country|',none,''|Delivery_Postcode|',none,''|franchisee|none,none,1|contact|',none,''|email|',none,''|userid|',none,''|passwd|',none,''|payment|none,none,1|enable|none,none,1|online|none,none,1"
     
       ' create the MM_fields and MM_columns arrays
       MM_fields = Split(MM_fieldsStr, "|")
@@ -502,7 +504,7 @@
                     <fieldset class="form-group col-md-12 col-sm-12 col-xs-12 form-check">
                         <label for="franchise" class="form-check-label"> Franchise
                             <p class="form-control-static" style="margin-left: 30px;">
-                                <input class="form-check-input" type="checkbox" name="franchisee" id="franchisee" value="1" >
+                                <input class="form-check-input" type="checkbox" name="franchisee" id="franchisee" value="1"  >
                                 Are you a F45 franchisee?
                             </p>
                         </label> 

@@ -330,44 +330,51 @@ str_Promo_Disc = RSClient1.Fields.Item("Promo_Disc").Value
                                 Repeat1__index=Repeat1__index+1
                                 Repeat1__numRows=Repeat1__numRows-1
                                 RSAddress.MoveNext()
-                            Wend    %>
+                            Wend    
 
-                            <tr>
-                                <td>
-                                    <input name="Address" type="radio" value="7610"     <% 
-                                    If (Cstr(Request("postcode")) = "9999" ) Then
-                                        %>checked<% 
-                                        Pickup = 1
-                                    End If %> 
-                                    title=""  onClick="postcode_change('9999','7610')" >
-                                </td>
-                                <td><p>NEXT DAY PICK UP  </p></td>
-                                <td><p>
-                                    Please pickup from <br>
-                                    260-266 Cleveland Street Surry Hills <br>
-                                    (enter via Little Buckingham Street Loading Dock) <br>
-                                    Mon to Friday 8.30am to 5:00 pm.</p>
-                                </td>
-                            </tr>
-                           
+                            if Session("client_ID") = "99" then                            %>
+
+                                <tr>
+                                    <td>
+                                        <input name="Address" type="radio" value="7610"     <% 
+                                        If (Cstr(Request("postcode")) = "9999" ) Then
+                                            %>checked<% 
+                                            Pickup = 1
+                                        End If %> 
+                                        title=""  onClick="postcode_change('9999','7610')" >
+                                    </td>
+                                    <td><p>NEXT DAY PICK UP  </p></td>
+                                    <td><p>
+                                        Please pickup from <br>
+                                        260-266 Cleveland Street Surry Hills <br>
+                                        (enter via Little Buckingham Street Loading Dock) <br>
+                                        Mon to Friday 8.30am to 5:00 pm.</p>
+                                    </td>
+                                </tr>   <%
+                            end if                                %>
                         </tbody>
                     </table>
                         
 
-                    </table>
+                    </table>        <%
                     
-                    <div class="form-group">
-                        <label for="purchase_order">Cost Centre / Purchase Order </label>
-                        <input type="text" name="purchase_order" class="form-control" id="purchase_order" placeholder="Cost Centre / Purchase Order">
-                    </div>
-                    <div class="form-group">
-                        <label for="building">Site / Building Name <% If (RSClient1.Fields.Item("building").Value) Then  %>*<%  End if %></label>
-                        <input name="building" class="form-control" type="text" id="building"  />
-                    </div>
-                    <div class="form-group">
-                        <label for="employee">This order is for (Enter name) <% If (RSClient1.Fields.Item("employee").Value) Then %>*<%  End if %></label>
-                        <input name="employee" class="form-control" type="text" id="employee"  />
-                    </div>
+                    if Session("client_ID") = "99" then         %>
+
+                        <div class="form-group">
+                            <label for="purchase_order">Cost Centre / Purchase Order </label>
+                            <input type="text" name="purchase_order" class="form-control" id="purchase_order" placeholder="Cost Centre / Purchase Order">
+                        </div>
+                        <div class="form-group">
+                            <label for="building">Site / Building Name <% If (RSClient1.Fields.Item("building").Value) Then  %>*<%  End if %></label>
+                            <input name="building" class="form-control" type="text" id="building"  />
+                        </div>
+                        <div class="form-group">
+                            <label for="employee">This order is for (Enter name) <% If (RSClient1.Fields.Item("employee").Value) Then %>*<%  End if %></label>
+                            <input name="employee" class="form-control" type="text" id="employee"  />
+                        </div>  <%
+                    end if          %>
+
+
                     <div class="form-group">
                         <label for="comment">
                                 Comments or additional information such as <strong>Delivery Instructions</strong>.<br>

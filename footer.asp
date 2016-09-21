@@ -1,7 +1,7 @@
 <footer id="fh5co-footer">
     <div class="container-fluid" id="footer-top">
-        <div class="container">
-        <div class="row">
+        <!-- <div class="container"> -->
+        <!-- <div class="row">
             <div class="container">
                 <div class="col-md-3 cols-sm-12">
                     <div class="row">
@@ -52,8 +52,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="divider"></div>
+        </div> -->
+        <!-- <div class="divider"></div> -->
         <div class="row">
             <div class="container">
                 <!-- <div class="col-md-3 col-sm-6 cols-xs-12">
@@ -98,13 +98,13 @@
                         <div class="col-md-12 cols-sm-12">
                             <div class="line"></div>
                             <ul class="pages-footer">
-                                <li><a href="#">Term & Conditions</a></li>
-                                <li><a href="#">Shipping & Refund</a></li>
+                                <li><a href="terms_conditions.asp">Term & Conditions</a></li>
+                                <li><a href="shipping_refund.asp">Shipping & Refund</a></li>
                                 <li><a href="ordering_instructions.asp">Ordering Instructions</a></li>
                                 <li><a href="returns_exchanges.asp">Returns and Exchanges</a></li>
-                                <li><a href="freight.asp">Freight</a></li>
+                                <!-- <li><a href="freight.asp">Freight</a></li> -->
                                 <li><a href="garmet_care.asp">Garment Care</a></li>
-                                <li><a href="recommended_retail_price.asp">Recommended Retail Price</a></li><%
+                                <!-- <li><a href="recommended_retail_price.asp">Recommended Retail Price</a></li> --><%
                                 if MM_grantAccess then                            %>
                                     <li><a href="getOrderHistory.asp">Order History</a></li><%
                                 end if                      %>
@@ -121,18 +121,18 @@
                         <div class="col-md-12 cols-sm-12">
                             <div class="line"></div>
                             <ul class="pages-footer">
-                                <li><span class="icon-map-pin2"></span><a href="#">Megnor Comp Pvt Limited,</a></li>
-                                <li><a href="#">507-Union Trade Centre, Beside </a></li>
+                                <li><span class="icon-map-pin2"></span><a href="#">F45 Teamwear,</a></li>
+                                <!-- <li><a href="#">507-Union Trade Centre, Beside </a></li>
                                 <li><a href="#">Apple Hospital, Udhana Darwaja,</a></li>
-                                <li><span class="icon-phone"></span><a href="#">(91)-261 30023333</a></li>
-                                <li><span class="icon-envelope"></span><a href="#">support@templatemela.com</a></li>
+                                <li><span class="icon-phone"></span><a href="#">(91)-261 30023333</a></li> -->
+                                <li><span class="icon-envelope"></span><a href="mailto:info@f45teamwear.com">info@f45teamwear.com</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
+        <!-- </div> -->
     </div>
     <div class="container-fluid" id="footer-bottom">
         <div class="row">
