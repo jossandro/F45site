@@ -197,8 +197,54 @@
       MM_editConnection = MM_dbConnect_STRING
       MM_editTable = "Customers"
       MM_editRedirectUrl = "register1.asp"
-      MM_fieldsStr  = "Client_ID|value|Cust_Name|value|Account|value|Phone|value|Fax|value|Store_Address|value|Store_Suburb|value|Store_State|value|Store_Country|value|Store_Postcode|value|Delivery_Address|value|Delivery_Suburb|value|Delivery_State|value|Delivery_Country|value|Delivery_Postcode|value|franchise|value|contact|value|email|value|userid|value|passwd|value|payment|value|enable|value|online|value"
-      MM_columnsStr = "Client_ID|none,none,NULL|Cust_Name|',none,''|Account|',none,''|Phone|',none,''|Fax|',none,''|Store_Address|',none,''|Store_Suburb|',none,''|Store_State|',none,''|Store_Country|',none,''|Store_Postcode|',none,''|Delivery_Address|',none,''|Delivery_Suburb|',none,''|Delivery_State|',none,''|Delivery_Country|',none,''|Delivery_Postcode|',none,''|franchise|',none,''|contact|',none,''|email|',none,''|userid|',none,''|passwd|',none,''|payment|none,none,1|enable|none,none,1|online|none,none,1"
+      MM_fieldsStr  = 
+        "Client_ID|value|
+        Cust_Name|value|
+        Account|value|
+        Phone|value|
+        Fax|value|
+        Store_Address|value|
+        Store_Suburb|value|
+        Store_State|value|
+        Store_Country|value|
+        Store_Postcode|value|
+        Delivery_Address|value|
+        Delivery_Suburb|value|
+        Delivery_State|value|
+        Delivery_Country|value|
+        Delivery_Postcode|value|
+        franchise|value|
+        contact|value|
+        email|value|
+        userid|value|
+        passwd|value|
+        payment|value|
+        enable|value|
+        online|value"
+      MM_columnsStr = 
+        "Client_ID|none,none,NULL|
+        Cust_Name|',none,''|
+        Account|',none,''|
+        Phone|',none,''|
+        Fax|',none,''|
+        Store_Address|',none,''|
+        Store_Suburb|',none,''|
+        Store_State|',none,''|
+        Store_Country|',none,''|
+        Store_Postcode|',none,''|
+        Delivery_Address|',none,''|
+        Delivery_Suburb|',none,''|
+        Delivery_State|',none,''|
+        Delivery_Country|',none,''|
+        Delivery_Postcode|',none,''|
+        franchise|',none,''|
+        contact|',none,''|
+        email|',none,''|
+        userid|',none,''|
+        passwd|',none,''|
+        payment|none,none,1|
+        enable|none,none,1|
+        online|none,none,1"
     
       ' create the MM_fields and MM_columns arrays
       MM_fields = Split(MM_fieldsStr, "|")
@@ -401,6 +447,7 @@
           errors = "password error";
       }
     }
+    $('#fieldsetContact').attr('style','display:block;');
     document.MM_returnValue = (errors == '');
   }
   
@@ -454,23 +501,23 @@
                     </fieldset>
                     <fieldset class="form-group col-md-12 col-sm-12 col-xs-12">
                         <label for="Store_Address">Address</label>
-                        <input type="text" class="form-control" id="Store_Address" placeholder="Address" name="Store_Address" value="<%=sStore_Address%>">
+                        <input type="text" class="form-control" id="Store_Address" placeholder="Store Address" name="Store_Address" value="<%=sStore_Address%>">
                     </fieldset>
                     <fieldset class="form-group col-md-6 col-sm-6 col-xs-12">
                         <label for="Store_Suburb">Suburb</label>
-                        <input type="text" class="form-control" id="Store_Suburb" placeholder="Suburb" name="Store_Suburb" value="<%=sStore_Suburb%>">
+                        <input type="text" class="form-control" id="Store_Suburb" placeholder="Store Suburb" name="Store_Suburb" value="<%=sStore_Suburb%>">
                     </fieldset>
                     <fieldset class="form-group col-md-6 col-sm-6 col-xs-12">
                         <label for="Store_State">State</label>
-                        <input type="text" class="form-control" id="Store_State" placeholder="State" name="Store_State" value="<%=sStore_State%>">
+                        <input type="text" class="form-control" id="Store_State" placeholder="Store State" name="Store_State" value="<%=sStore_State%>">
                     </fieldset>
                     <fieldset class="form-group col-md-6 col-sm-6 col-xs-12">
                         <label for="Store_Country">Country</label>
-                        <input type="text" class="form-control" id="Store_Country" placeholder="Country" name="Store_Country" value="<%=sStore_Country%>">
+                        <input type="text" class="form-control" id="Store_Country" placeholder="Store Country" name="Store_Country" value="<%=sStore_Country%>">
                     </fieldset>
                     <fieldset class="form-group col-md-6 col-sm-6 col-xs-12">
                         <label for="Store_Postcode">Postcode</label>
-                        <input type="text" class="form-control" id="Store_Postcode" placeholder="Postcode" name="Store_Postcode" value="<%=sStore_Postcode%>" >
+                        <input type="text" class="form-control" id="Store_Postcode" placeholder="Store Postcode" name="Store_Postcode" value="<%=sStore_Postcode%>" >
                     </fieldset>
 
                     <fieldset class="form-group col-md-12 col-sm-12 col-xs-12 form-check">

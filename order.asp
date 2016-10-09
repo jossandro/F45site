@@ -244,7 +244,7 @@ End If
             <div class="com-md-12">         <% 
                     strCol  = RSClient1.Fields.Item("download_chart").Value  
                     if (strCol <> "") Then %>
-                      <p class="item-size-chart " ><small>Size Chart  <a href="../databases/downloads/<%= strCol %>" target="chart">click here</a></small></p>
+                      <p class="item-size-chart " ><small>Size Chart  <a href="downloads/<%= strCol %>" target="chart">click here</a></small></p>
                     <% End If %>
             </div>
         </div>

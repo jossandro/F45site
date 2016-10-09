@@ -16,7 +16,7 @@
 <section class="owl-carousel owl-carousel1 owl-carousel-fullwidth fh5co-light-arrow animate-box" data-animate-effect="fadeIn">
     <!-- <div class="item"><a href="images/under-armour.jpg" class="image-popup"><img src="images/under-armour.jpg" alt="image"></a></div>
     <div class="item"><a href="images/nike-just-do-it.jpg" class="image-popup"><img src="images/nike-just-do-it.jpg" alt="image"></a></div> -->
-    <div class="item"><a href="images/gym1.png" class="image-popup"><img src="images/gymone.png" alt="image"></a></div>
+    <div class="item"><a href="images/gym1.png" class="image-popup"><img src="images/gym1.png" alt="image"></a></div>
     <div class="item"><a href="images/guys2.png" class="image-popup"><img src="images/guys2.png" alt="image"></a></div>
     <div class="item"><a href="images/pic3.png" class="image-popup"><img src="images/pic3.png" alt="image"></a></div>
 </section>

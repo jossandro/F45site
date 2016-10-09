@@ -180,21 +180,21 @@ function insert_new_address(get_form)
     MM_editCmd.CommandText = "INSERT INTO Address (Delivery_Contact,Delivery_Address, Delivery_Suburb, Delivery_State, Delivery_Country, Delivery_Postcode,Customer_ID) VALUES (?, ?, ?, ?, ?, ?, ?)" 
     MM_editCmd.Prepared = true
     if(get_form) Then
-    MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param1", 202, 1, 255, Request.Form("Delivery_Contact")) ' adVarWChar
-    MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param2", 202, 1, 255, Request.Form("Delivery_Address")) ' adVarWChar
-    MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param3", 202, 1, 255, Request.Form("Delivery_Suburb")) ' adVarWChar
-    MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param4", 202, 1, 255, Request.Form("Delivery_State")) ' adVarWChar
-    MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param5", 202, 1, 255, Request.Form("Delivery_Country")) ' adVarWChar
-    MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param6", 202, 1, 255, Request.Form("Delivery_Postcode")) ' adVarWChar
-    MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param7", 202, 1, 255, Request.Form("Customer_ID")) ' adVarWChar
+      MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param1", 202, 1, 255, Request.Form("Delivery_Contact")) ' adVarWChar
+      MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param2", 202, 1, 255, Request.Form("Delivery_Address")) ' adVarWChar
+      MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param3", 202, 1, 255, Request.Form("Delivery_Suburb")) ' adVarWChar
+      MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param4", 202, 1, 255, Request.Form("Delivery_State")) ' adVarWChar
+      MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param5", 202, 1, 255, Request.Form("Delivery_Country")) ' adVarWChar
+      MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param6", 202, 1, 255, Request.Form("Delivery_Postcode")) ' adVarWChar
+      MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param7", 202, 1, 255, Request.Form("Customer_ID")) ' adVarWChar
     else
-    MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param1", 202, 1, 255, Delivery_Contact) ' adVarWChar
-    MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param2", 202, 1, 255, Delivery_Address) ' adVarWChar
-    MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param3", 202, 1, 255, Delivery_Suburb) ' adVarWChar
-    MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param4", 202, 1, 255, Delivery_State) ' adVarWChar
-    MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param5", 202, 1, 255, Delivery_Country) ' adVarWChar
-    MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param6", 202, 1, 255, Delivery_Postcode) ' adVarWChar
-    MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param7", 202, 1, 255, Customer_ID) ' adVarWChar
+      MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param1", 202, 1, 255, Delivery_Contact) ' adVarWChar
+      MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param2", 202, 1, 255, Delivery_Address) ' adVarWChar
+      MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param3", 202, 1, 255, Delivery_Suburb) ' adVarWChar
+      MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param4", 202, 1, 255, Delivery_State) ' adVarWChar
+      MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param5", 202, 1, 255, Delivery_Country) ' adVarWChar
+      MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param6", 202, 1, 255, Delivery_Postcode) ' adVarWChar
+      MM_editCmd.Parameters.Append MM_editCmd.CreateParameter("param7", 202, 1, 255, Customer_ID) ' adVarWChar
     end if  
     MM_editCmd.Execute
     MM_editCmd.ActiveConnection.Close
@@ -271,7 +271,7 @@ end function
             </fieldset>
             <fieldset class="form-group col-md-6 col-sm-6 col-xs-12">
                 <label for="Store_Country">Store Country</label>
-                <input type="text" class="form-control" id="Store_Country" placeholder="Store Country" name="Store_Country" value="<%=(RSCustomer.Fields.Item("Store_Country").Value)%>">
+                <input type="text" class="form-control" id="Store_Country" placeholder="Store Country" name="Store_Country" value="Australia" readonly="true">
             </fieldset>
             <fieldset class="form-group col-md-6 col-sm-6 col-xs-12">
                 <label for="Store_Postcode">Store Postcode</label>
@@ -336,7 +336,7 @@ end function
                 </fieldset>
                 <fieldset class="form-group col-md-6 col-sm-6 col-xs-12">
                     <label for="Delivery_Country">Delivery Country</label>
-                    <input type="text" class="form-control" id="Delivery_Country" placeholder="Delivery Country" name="Delivery_Country" value="<%=(RSCustomer.Fields.Item("Delivery_Country").Value)%>" >
+                    <input type="text" class="form-control" id="Delivery_Country" placeholder="Delivery Country" name="Delivery_Country" value="Australia" readonly="true">
                 </fieldset>
                 <fieldset class="form-group col-md-6 col-sm-6 col-xs-12">
                     <label for="Delivery_Postcode">Delivery Postcode</label>
@@ -365,8 +365,8 @@ end function
     <div class="container ">
         <form name="form1" ACTION="<%=MM_editAction%>" method="POST" >
             <fieldset class="form-group col-md-6 col-sm-6 col-xs-12">
-                <label for="Delivery_Name">Delivery Name</label>
-                <input type="text" class="form-control" id="Delivery_Name" placeholder="Delivery Name" name="Delivery_Name" value="" >
+                <label for="Delivery_Contact">Delivery Name</label>
+                <input type="text" class="form-control" id="Delivery_Contact" placeholder="Delivery Name" name="Delivery_Contact" value="" >
                 <!-- <input type="text" class="form-control" id="Delivery_Contact" placeholder="Delivery Contact" name="Delivery_Contact" value="" > -->
             </fieldset>
             <fieldset class="form-group col-md-6 col-sm-6 col-xs-12">
@@ -383,7 +383,7 @@ end function
             </fieldset>
             <fieldset class="form-group col-md-6 col-sm-6 col-xs-12">
                 <label for="Delivery_Country">Delivery Country</label>
-                <input type="text" class="form-control" id="Delivery_Country" placeholder="Delivery Country" name="Delivery_Country" value="" >
+                <input type="text" class="form-control" id="Delivery_Country" placeholder="Delivery Country" name="Delivery_Country" value="Australia" readonly="true" >
             </fieldset>
             <fieldset class="form-group col-md-6 col-sm-6 col-xs-12">
                 <label for="Delivery_Postcode">Delivery Postcode</label>
